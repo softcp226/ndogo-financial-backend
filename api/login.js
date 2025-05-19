@@ -58,7 +58,7 @@ Router.post("/", async (req, res) => {
 
     res.status(200).json({
       error: false,
-      message: { user: user._id, account_type:user.last_login },
+      message: { user: user._id, account_type:user.account_type, user_last_login:user.last_login },
       token,
     });
   } catch (err) {

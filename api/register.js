@@ -6,13 +6,14 @@ const hashPassword = require("../hash/hashPassword");
 const User = require("../model/user");
 
 Router.post("/", async (req, res) => {
+  // console.log(req.body)
   const isvalid = validateUser(req.body);
   if (isvalid != true)
     return res.status(400).json({ error: true, errMessage: isvalid });
 
   try {
     const user = await User.findOne({ email: req.body.email });
-    // console.log(user);
+    console.log(user);
     if (user) {
       // console.log("use", user);
       if (!user.password) {
@@ -21,7 +22,9 @@ Router.post("/", async (req, res) => {
           phone_number: req.body.phone_number,
           country: req.body.country,
           // referral_link: `https://www.softjovial.com?${u}`,
-          referral_link: `https://softjovial.biz?${req.body.email}`,
+           account_type:req.body.country =="Kenya"?"KES":"USD",
+
+          referral_link: `https://crescentpips.com?${req.body.email}`,
 
           referral: req.body.referral,
         });
@@ -29,7 +32,9 @@ Router.post("/", async (req, res) => {
         const token = genToken(user._id);
         return res.status(200).json({
           error: false,
-          message: { user: user._id },
+          // message: { user: user._id },
+           message: { user: user._id,country: user.country},
+
           token,
         });
       }
@@ -43,7 +48,7 @@ Router.post("/", async (req, res) => {
       phone_number: req.body.phone_number,
       country: req.body.country,
       // referral_link: `https://www.softjovial.com?${req.body.email}`,
-      referral_link: `https://softjovial.biz?${req.body.email}`,
+      referral_link: `https://crescentpips.com?${req.body.email}`,
 
       referral: req.body.referral,
     });
@@ -53,7 +58,7 @@ Router.post("/", async (req, res) => {
     const token = genToken(result._id);
     res.status(200).json({
       error: false,
-      message: { user: result._id },
+      message: { user: result._id,country: result.country},
       token,
     });
   } catch (err) {

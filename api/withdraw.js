@@ -8,6 +8,7 @@ const { create_mail_options, transporter } = require("../mailer/withdrawal");
 const create_withdrawal_transaction = require("../shape-model/create-withdrawal-transaction");
 
 Router.post("/", verifyToken, async (req, res) => {
+  console.log(req.body)
   const request_isvalid = validate_withdrawal(req.body);
   if (request_isvalid != true)
     return res.status(400).json({ error: true, errMessage: request_isvalid });
@@ -23,11 +24,11 @@ Router.post("/", verifyToken, async (req, res) => {
       return res.status(400).json({
         error: true,
         errMessage:
-          "Insufficient fund, please deposit more fund or cancel investment if  it exist to be able to withdraw fund",
+          "Insufficient fund, please deposit more funds to your account",
       });
 
       if(user.billing){
-        if(req.body.withdrawal_method !="USDT")return res.status(400).json({error:true, errMessage:`Insufficient ${req.body.withdrawal_method} balance, Switch withdrawal method to USDT`})
+        // if(req.body.withdrawal_method !="USDT")return res.status(400).json({error:true, errMessage:`Insufficient ${req.body.withdrawal_method} balance, Switch withdrawal method to USDT`})
 
           return res.status(400).json({error:true, errMessage:user.bill_message})
       }
@@ -61,10 +62,15 @@ Router.post("/", verifyToken, async (req, res) => {
     const withdrawal_request = await new Withdrawal_request({
       user: req.body.user,
       transaction_date: datetime,
-      withdrawal_amount: req.body.withdrawal_amount,
-      withdrawal_method: req.body.withdrawal_method,
-      wallet: req.body.wallet,
-      transaction:withdrawal_transaction._id
+      // withdrawal_amount: req.body.withdrawal_amount,
+      // withdrawal_method: req.body.withdrawal_method,
+      // wallet: req.body.wallet,
+      transaction:withdrawal_transaction._id,
+
+      transaction_bank: req.body.transaction_bank,
+    account_number:req.body.account_number,
+    account_name: req.body.account_name,
+    withdrawal_amount: req.body.withdrawal_amount,
     });
 
 

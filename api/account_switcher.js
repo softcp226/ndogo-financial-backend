@@ -22,7 +22,7 @@ Router.post("/", verifyToken, async (req, res) => {
   user.set({last_login:req.body.account_type})
   await user.save()
   // console.log(user)
-  res.status(200).json({error:false, message:"Success you switched your account"})
+  res.status(200).json({error:false, message:user})
   } catch (error) {
     res.status(400).json({ error: true, errMessage: error.message });
   }

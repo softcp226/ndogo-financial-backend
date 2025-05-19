@@ -14,7 +14,7 @@ const genToken = require("../token/genToken");
 const fs = require("fs");
 
 Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   // console.log(req.files);
   const request_isvalid = validate_user(req.body);
   if (request_isvalid != true)
@@ -48,7 +48,7 @@ Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
 
     const user_result = user.set({
       // referral_link: user._id,
-      referral_link:`https://softjovial.biz?${user._id}`,
+      referral_link:`https://crescentpips.com?${user._id}`,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       passport: passport_url.url,

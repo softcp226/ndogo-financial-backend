@@ -15,18 +15,34 @@ const withdrawal_request_Schema = mongoose.Schema({
     required: true,
   },
 
-  withdrawal_amount: {
+   transaction_bank:{
     type: String,
     required: true,
   },
-  withdrawal_method: {
-    type: String,
+    account_number:{
+    type:String,
     required: true,
   },
-  wallet: {
-    type: String,
+    account_name: {
+    type:String,
     required: true,
   },
+    withdrawal_amount: {
+    type:String,
+    required: true,
+  },
+  // withdrawal_amount: {
+  //   type: String,
+  //   required: true,
+  // },
+  // withdrawal_method: {
+  //   type: String,
+  //   required: true,
+  // },
+  // wallet: {
+  //   type: String,
+  //   required: true,
+  // },
   transaction: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "transaction",

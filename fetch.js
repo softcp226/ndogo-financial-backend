@@ -150,17 +150,17 @@ create_admin("admin", "password");
 // var date = new Date();
 
 // add a day
-let date = new Date();
-date.setDate(date.getDate() + 1);
-let end_date = date.getTime();
+// let date = new Date();
+// date.setDate(date.getDate() + 1);
+// let end_date = date.getTime();
 
-let up_date = new Date();
-up_date.setDate(up_date.getDate());
-let today = up_date.getTime();
+// let up_date = new Date();
+// up_date.setDate(up_date.getDate());
+// let today = up_date.getTime();
 
-console.log(end_date <= today);
-console.log(today);
-console.log(end_date);
+// console.log(end_date <= today);
+// console.log(today);
+// console.log(end_date);
 // var d1 = new Date();
 // var d2 = new Date();
 // d2.setDate(currentdate.getDate() + 7);

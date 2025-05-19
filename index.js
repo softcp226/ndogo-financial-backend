@@ -4,7 +4,7 @@ app.use(express.json());
 require("dotenv").config();
 const cors = require("cors");
 app.use(cors());
-
+// console.log(process.env.db_Url)
 // app.use("/", express.static("html"));
 // /api/user/referral/fetch
 // app.use("/admin", express.static("admin"));

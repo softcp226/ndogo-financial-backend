@@ -78,14 +78,6 @@ const userSchema = mongoose.Schema({
 
 
 
-
-
-
-
-
-
-
-    
   },
 
   last_login:{
@@ -93,6 +85,12 @@ const userSchema = mongoose.Schema({
     required:true,
     default:"real_account",
     enum:["demo_account", "real_account"]
+  },
+  account_type:{
+     type:String,
+    required:true,
+    default:"USD",
+    enum:["KES","USD"],
   },
   // created_same_investment_ealier: {
   //   type: Number,
