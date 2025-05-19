@@ -19,7 +19,7 @@ const {
 } = require("../mailer/referral_fund");
 
 Router.post("/", verifyToken, async (req, res) => {
-  console.log(req.body);
+
   const request_isvalid = validate_admin_approve_deposit(req.body);
   if (request_isvalid != true)
     return res.status(400).json({ error: true, errMessage: request_isvalid });
@@ -135,6 +135,7 @@ Router.post("/", verifyToken, async (req, res) => {
         first_name: user.first_name,
         last_name: user.last_name,
         reciever: user.email,
+        currency:user.country =="Kenya"?"KES":"$"  
       }),
       (err, info) => {
         if (err) return console.log(err.message);

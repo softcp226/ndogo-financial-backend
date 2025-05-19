@@ -13,7 +13,7 @@ Router.post("/", async (req, res) => {
 
   try {
     const user = await User.findOne({ email: req.body.email });
-    console.log(user);
+    // console.log(user);
     if (user) {
       // console.log("use", user);
       if (!user.password) {

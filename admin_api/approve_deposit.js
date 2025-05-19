@@ -126,7 +126,7 @@ Router.post("/", verifyToken, async (req, res) => {
     // });
     // await total_deposit.save();
 
-    await Deposit_request.findByIdAndDelete(req.body.deposit_request);
+    // await Deposit_request.findByIdAndDelete(req.body.deposit_request);
 
     await transaction.save();
     await user.save();
@@ -136,6 +136,7 @@ Router.post("/", verifyToken, async (req, res) => {
         first_name: user.first_name,
         last_name: user.last_name,
         reciever: user.email,
+        deposit_amount:deposit_request.deposit_amount
       }),
       (err, info) => {
         if (err) return console.log(err.message);

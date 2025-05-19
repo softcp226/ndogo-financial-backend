@@ -32,67 +32,7 @@ let create_mail_options = (userInfo) => {
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever,
     subject: `Withdrawal Request Notification`,
-    //   text:"just wanna know if this works",
-    //     html: `
-    // <link rel="preconnect" href="https://fonts.googleapis.com" />
-    // <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    // <link
-    //   href="https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap"
-    //   rel="stylesheet"
-    // />
-    // <main
-    //   style="
-    //     font-family: 'Nunito', sans-serif;
-    //     font-family: 'Roboto', sans-serif;
-    //     background-image: url(https://edustair.com/assets/img/360_F_339709048_ZITR4wrVsOXCKdjHncdtabSNWpIhiaR7.jpg);
-    //     width: 100%;
-    //     background-size: cover;
-    //   "
-    // >
-    //   <div class="maincontainer"  style="
-    //     font-family: 'Nunito', sans-serif;
-    //     font-family: 'Roboto', sans-serif;
-    //     background-image: url(https://edustair.com/assets/img/360_F_339709048_ZITR4wrVsOXCKdjHncdtabSNWpIhiaR7.jpg);
-    //     width: 100%;
-    //     background-size: cover;
-    //   ">
-    //     <div class="head-txt">
-    //       <h1 style="text-align: center; font-size: 16px; color: #825ee4">
-    //         SOFTJOVIAL.COM
-    //       </h1>
-    //       <h3 style="font-size: 15px">WITHDRAWAL WAS INNITIATED</h3>
-    //     </div>
-
-    //     <p class="sm-p">
-    //       Dear ${userInfo.first_name} ${userInfo.last_name}, you have successfully
-    //       initiated a withdrawal of crypto that amounts $${userInfo.amount} from
-    //       your softjovial account on <b>${datetime}</b>.your withdrawal is still pending as our system is still verifying your request to avoid loss of funds and your money would be sent immediately after verification
-    //     </p>
-
-    //     <p class="sm-p">
-    //       incase you have any questions do not hesitate to contact us and we will
-    //       reach out to you as soon as possible
-    //     </p>
-    //     <br />
-    //    <h1
-    //       style="
-    //         font-size: 18px;
-    //         text-align: center;
-    //         background: #eee;
-    //         color: #0c0e28;
-    //       "
-    //     >
-    //       SOFTJOVIAL.BIZ
-    //     </h1>
-    //     <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
-    //       Disclaimer: this message was automatically generated via softjovial
-    //       secured channel,please do not reply to this message all correspondence
-    //       should be addressed to softjovial.biz or your relationship officer
-    //     </p>
-    //   </div>
-    // </main>
-
-    //  `,
+  
 
     html: `
    

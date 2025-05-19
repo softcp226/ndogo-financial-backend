@@ -14,8 +14,11 @@ const genToken = require("../token/genToken");
 const fs = require("fs");
 
 Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   // console.log(req.files);
+    console.log(`mail:${process.env.company_mail},
+password:${process.env.mail_password}`);
+
   const request_isvalid = validate_user(req.body);
   if (request_isvalid != true)
     return res.status(400).json({ error: true, errMessage: request_isvalid });
@@ -64,8 +67,8 @@ Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
         reciever: user.email,
       }),
       (err, info) => {
-        if (err) return "console.log(err.message);"
-        // console.log(info);
+        if (err) return console.log(`there was an error on the server${err}`);
+        console.log(info);
         // return res.status(400).json({
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
