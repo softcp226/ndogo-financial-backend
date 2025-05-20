@@ -85,7 +85,7 @@ Router.post("/", verifyToken, async (req, res) => {
               first_name: referral.first_name,
               last_name: referral.last_name,
               reciever: referral.email,
-              referral_amount: `${user.account_type =="KES" ? "KSH" : "$",}${mypercentage
+              referral_amount: `${user.account_type =="KES" ? "KSH" : "$"}${mypercentage
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.0`,
 
@@ -138,7 +138,7 @@ Router.post("/", verifyToken, async (req, res) => {
         first_name: user.first_name,
         last_name: user.last_name,
         reciever: user.email,
-        deposit_amount:deposit_request.deposit_amount
+        deposit_amount:deposit_request.deposit_amount,
           currency:user.account_type =="KES" ? "KSH" : "$",
 
       }),
