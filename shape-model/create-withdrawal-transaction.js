@@ -1,6 +1,6 @@
 const Transaction = require("../model/transaction");
 
-const create_withdrawal_transaction = async (req) => {
+const create_withdrawal_transaction = async (req,userdetails) => {
   let currentdate = new Date();
   let datetime = `${currentdate.getFullYear()}-${
     currentdate.getMonth() + 1
@@ -11,7 +11,7 @@ const create_withdrawal_transaction = async (req) => {
     user: req.body.user,
     refrence_number: `#Withdrawl `,
     transaction_date: datetime,
-    debit: `-$${req.body.withdrawal_amount
+    debit: `-${userdetails.account_type =='KES'?'KSH':"$"}${req.body.withdrawal_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "pending",

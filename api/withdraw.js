@@ -56,7 +56,7 @@ Router.post("/", verifyToken, async (req, res) => {
       currentdate.getMonth() + 1
     }-${currentdate.getDate()} -  ${currentdate.getHours()}: ${currentdate.getMinutes()} : ${currentdate.getSeconds()}`;
 
-    withdrawal_transaction=await create_withdrawal_transaction(req);
+    withdrawal_transaction=await create_withdrawal_transaction(req,user);
     // console.log("withdrawal request result",withdrawal_transaction)
 
     const withdrawal_request = await new Withdrawal_request({

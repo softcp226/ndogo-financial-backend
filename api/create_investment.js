@@ -101,7 +101,7 @@ Router.post("/", verifyToken, async (req, res) => {
     });
     await user.save();
     // console.log(user.parseInt);
-    await create_investment(req);
+    await create_investment(req,user);
 
     transporter.sendMail(
       create_mail_options({

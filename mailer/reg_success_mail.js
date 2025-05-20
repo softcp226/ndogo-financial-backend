@@ -119,7 +119,7 @@ html:`<!DOCTYPE html>
 
             <p>Thank you for registering an account with us. We’re excited to have you on board and look forward to supporting your trading journey.</p>
 
-            <p>You’re now ready to make a deposit, place trades, and start working toward your financial goals. Our platform is built to give you the tools and insights you need to trade confidently and profitably.</p>
+            <p>You’re now ready to make a deposit, place trades, and start working toward your financial goals. Our platform is built to give you the tools and insights. use the create trade button to give an instruction and we will execute the trade for you</p>
 
             <p>If you need any help getting started, our support team is here for you at any time.</p>
         </div>

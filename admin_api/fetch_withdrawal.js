@@ -24,7 +24,7 @@ Router.post("/", verifyToken, async (req, res) => {
         error: true,
         errMessage: "Forbidden!, please login again to access this api",
       });
-    const withdrawal = await Withdrawal_request.find().populate("user");
+    const withdrawal = await Withdrawal_request.find().populate("user").populate("transaction");
     if (withdrawal.length < 1)
       return res.status(400).json({
         error: true,

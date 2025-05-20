@@ -64,8 +64,8 @@ Router.post("/", upload.any("receipt"),verifyToken, async (req, res) => {
         reciever: user.email,
       }),
       (err, info) => {
-        if (err) return console.log(err.message);
-        console.log(info);
+        if (err) return "console.log(err.message);"
+        // console.log(info);
         // return res.status(400).json({
         //   error: true,
         //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,

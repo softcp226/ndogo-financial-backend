@@ -58,7 +58,7 @@ const select_investment_end_time = (req) => {
   // }
 };
 
-const create_investment = async (req) => {
+const create_investment = async (req,userdetails) => {
   let currentdate = new Date();
   let datetime = `${currentdate.getFullYear()}-${
     currentdate.getMonth() + 1
@@ -83,7 +83,7 @@ const create_investment = async (req) => {
     user: req.body.user,
     refrence_number: `#Create Trade`,
     transaction_date: datetime,
-    debit: `-$${req.body.investment_amount
+    debit: `-${userdetails.account_type =='KES'?'KSH':"$"}${req.body.investment_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "success",

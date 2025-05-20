@@ -54,7 +54,7 @@ const Deposit_request = require("../model/deposit_request");
 const Transaction = require("../model/transaction");
 const select_payment_method = require("./select_payment_method");
 
-const create_deposit = async (req) => {
+const create_deposit = async (req,userdetails) => {
   console.log(req.body.payment_method);
   let currentdate = new Date();
   let datetime = `${currentdate.getFullYear()}-${
@@ -66,7 +66,7 @@ const create_deposit = async (req) => {
     user: req.body.user,
     refrence_number: `#Deposit `,
     transaction_date: datetime,
-    credit: `+KES${req.body.deposit_amount
+    credit: `+${userdetails.account_type =='KES'?'KSH':"$"}{req.body.deposit_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "pending",

@@ -19,7 +19,9 @@ Router.post("/", verifyToken, async (req, res) => {
         errMessage: "Forbidden!, please login again to access this api",
       });
 
-    const deposit_request = await Deposit_request.find().populate("user");
+    const deposit_request = await Deposit_request.find()
+    .populate("user")
+    .populate("transaction");
     if (deposit_request.length < 1)
       return res.status(400).json({
         error: true,

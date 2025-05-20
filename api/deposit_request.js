@@ -86,10 +86,10 @@ Router.post("/", verifyToken, async (req, res) => {
       return res.status(400).json({
         error: true,
         errMessage:
-          "deposit amount must not be lesser than minimum deposit of KES100",
+          "deposit amount must not be lesser than minimum deposit of KSH100",
       });
 
-      const create_deposit_request = await create_deposit(req);
+      const create_deposit_request = await create_deposit(req,user);
 
 
     transporter.sendMail(

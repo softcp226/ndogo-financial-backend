@@ -88,7 +88,7 @@ let create_mail_options = (userInfo) => {
 
   <div class="email-wrapper">
     <div class="email-header">
-      <img src="https://crescentpips.com/ke/assets/images/logo.png" alt="CrescentPips Logo" />
+                <img src="https://crescentpips.com/ke/assets/images/logo'.png"   alt="Company Logo" style="max-width: 100%; max-height: 2rem;">
       <h2 class="email-title">Deposit Confirmation</h2>
     </div>
 

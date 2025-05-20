@@ -47,7 +47,7 @@ Router.post("/", async (req, res) => {
       email: req.body.email,
       phone_number: req.body.phone_number,
       country: req.body.country,
-      account_type:body.country != "Kenya" ? "USD" :"KES",
+      account_type:body.country != "Kenya" ? "USD" : "KES",
       // referral_link: `https://www.softjovial.com?${req.body.email}`,
       referral_link: `https://crescentpips.com?${req.body.email}`,
 
