@@ -34,127 +34,99 @@ let create_mail_options = (userInfo) => {
     subject: `PASSWORD RECOVERY REQUEST`,
     //   text:"just wanna know if this works",
     html: `
- 
-
- <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap"
-  rel="stylesheet"
-/>
-<main>
- 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Nunito+Sans:ital,wght@0,600;0,700;1,600&family=Nunito:ital,wght@0,200;0,300;1,200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@400;500&display=swap');
-
-.maincontainer{
-font-family: 'Nanum Gothic Coding', monospace;
-font-family: 'Nunito', sans-serif;
-font-family: 'Nunito Sans', sans-serif;
-font-family: 'Open Sans', sans-serif;
-font-family: 'Poppins', sans-serif;
-font-family: 'Roboto', sans-serif;
-      width: 100%;
-      top: 0;
-      left: 0;
-      right: 0;
-      font-weight: 100;
-      line-height: 2.5;
-    }
-    .cordial {
-      font-size: 16px;
-    
-    }
-    .head-txt {
-      text-align: center;
-      background-color: #142c8e;
-      font-size: 20px;
-      color: #fff;
-    }
-    .paragraph-01,
-    .paragraph-02 {
-      font-size: 15.5px;
-      padding: 1px;
-    }
-    .paragraph-03 {
-      font-weight: 400;
-      font-size: 15.5px;
-      padding: 1px;
-      color: green;
-    }
-    .paragraph-04{
-      font-size: 15.5px;
-      padding: 1px; 
-    }
-    .disclaimer{
-        font-size: 12px;
-        font-weight: 700;
-        padding: 0px;
-    }
-    h1,h2,h4,h5,h6{
-        font-size: 18px;
-    }
-  </style>
-
- 
-    <div class="head-txt">
-                <img src="https://crescentpips.com/ke/assets/images/logo'.png"   alt="Company Logo" style="max-width: 100%; max-height: 2rem;">
-
-      </h1>
-            <h3 style="font-size: 18px; text-align: center;">ACCOUNT RECOVERY</h3>
-    </div>
-
-    <p >
-      Dear ${userInfo.first_name} ${userInfo.last_name},<br> your request to reset your account password has been recieved.<br>
- 
- <br>     <a
-        href="${userInfo.reset_link}"
-        style="
-          color: #fff;
-          background-color: #0c0e28 ;
-          border-color: #0c0e28 ;
+     <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Password Recovery</title>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        body {
+          margin: 0;
+          padding: 0;
+          background-color: #f6f9fc;
+          font-family: 'Poppins', sans-serif;
+        }
+        .email-wrapper {
+          max-width: 600px;
+          margin: 40px auto;
+          background-color: #ffffff;
+          border-radius: 10px;
+          padding: 30px;
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+          border: 1px solid #e0e0e0;
+        }
+        .email-header {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        .email-header img {
+          height: 40px;
+        }
+        .email-title {
+          font-size: 22px;
+          font-weight: 600;
+          color: #2c3e50;
+          margin: 20px 0 10px;
+        }
+        .email-body {
+          font-size: 16px;
+          color: #555;
+          line-height: 1.6;
+        }
+        .btn {
+          display: inline-block;
+          padding: 12px 20px;
+          background-color: #0c0e28;
+          color: #ffffff !important;
+          border-radius: 5px;
           text-decoration: none;
-          padding: 5px;
-          border-radius: 2px;
-        "
-        >RESET PASSWORD</a
-      >
-       <br><br>
-            or follow the link below to reset your password if the button does not work
-    </p>
+          margin: 20px 0;
+        }
+        .email-footer {
+          text-align: center;
+          font-size: 13px;
+          color: #999;
+          margin-top: 40px;
+        }
+      </style>
+    </head>
+    <body>
 
-     <p >
-     ${userInfo.reset_link}
-     </p>
+      <div class="email-wrapper">
+        <div class="email-header">
+                <img src="https://crescentpips.com/ke/assets/images/logo'.png"   alt="Company Logo" style="max-width: 100%; max-height: 2rem;">
+          <h2 class="email-title">Account Recovery</h2>
+        </div>
 
-    <p >
-      For your protection, if you did not request a new password  do not take any action regarding to this email
-    </p>
-<br>
- <h1
-      style="
-        font-size: 18px;
-        text-align: center;
-        background: #eee;
-        color: #0c0e28;
-      "
-    >
-      CRESCENTPIPS
-    </h1>
-    <p class="disclaimer" style="font-size: 12px; font-weight: bolder">
-      Disclaimer: this message was automatically generated via softjovial
-      secured channel,please do not reply to this message all correspondence
-      should be addressed to crescentpips or your relationship officer
-    </p>
-  </div>
- 
-</main>
+        <div class="email-body">
+          <p>Dear <strong>${userInfo.first_name} ${userInfo.last_name}</strong>,</p>
+          <p>We received a request to reset your account password. If you initiated this request, please click the button below:</p>
+
+          <p style="text-align: center;">
+            <a href="${userInfo.reset_link}" class="btn">Reset Password</a>
+          </p>
+
+          <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
+          <p style="word-break: break-all;">${userInfo.reset_link}</p>
+
+          <p>If you didn’t request a password reset, you can safely ignore this message.</p>
+        </div>
+
+        <div class="email-footer">
+            <p>This email was sent via a secure channel by Crescentpips. If you did not initiate this request, please disregard this message.</p>
+        </div>
+      </div>
+
+    </body>
+    </html>
  `,
   });
 };
 module.exports = { create_mail_options, transporter };
 // transporter.sendMail(mailOptions, (err, info) => {
-//   if (err)
+//   if (err)softjovial
 //     return res
 //       .status(400)
 //       .json({ error: true, errMessage: `an error occured: ${err.message}` });

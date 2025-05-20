@@ -81,6 +81,7 @@ Router.post("/", verifyToken, async (req, res) => {
         first_name: user.first_name,
         last_name: user.last_name,
         reciever: user.email,
+       currency:user.account_type =="KES" ? "KSH" : "$",
         amount: req.body.withdrawal_amount,
       }),
       (err, info) => {

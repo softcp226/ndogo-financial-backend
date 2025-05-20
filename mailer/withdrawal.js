@@ -36,30 +36,81 @@ let create_mail_options = (userInfo) => {
 
     html: `
    
-        <div class="mail_template"
-            style="max-width: 600px; margin: auto; font-family: 'Poppins', sans-serif; background-color: #f2f2f2; padding: 20px; border-radius: 10px; border: 1px solid #ccc;">
-            <div style="text-align: center;">
-                <img src="https://softjovial.biz/css/images/IMG-20220829-WA0004~4.jpg"   alt="Company Logo" style="width: 80px; border-radius: 50%;">
-            </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <h3 style="font-size: 24px; font-weight: bold; color: #333;">WITHDRAWAL PENDING</h3>
-            </div>
-            <div style="margin-top: 30px;">
-                <p style="font-size: 18px; color: #555;">Dear ${userInfo.first_name} ${userInfo.last_name},</p>
-                <p style="font-size: 18px; color: #555;"> your withdrawal of $${userInfo.amount} from your softjovial trading account has been submitted, funds would be credited to your account once your withdrawal gets approved.</p>
-            </div>
-            <div style="margin-top: 30px;">
-                <p style="font-size: 18px; color: #555;"> For more detailed informations, please cntact our customer support</p>
-            </div>
-           
-            <div style="margin-top: 40px;">
-                <p style="font-size: 14px; color: #999; text-align: center;">This message was generated via softjovial secured channel. Please do not take any action if you did not make this request.</p>
-            </div>
+       <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal Notification</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f9fc;
+            font-family: 'Poppins', sans-serif;
+        }
+        .email-wrapper {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+        .email-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .email-header img {
+            height: 40px;
+        }
+        .email-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .email-body {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .email-footer {
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="email-wrapper">
+        <div class="email-header">
+                <img src="https://crescentpips.com/ke/assets/images/logo'.png"   alt="Company Logo" style="max-width: 100%; max-height: 2rem;">
+            <h2 class="email-title">Withdrawal Request Pending</h2>
         </div>
-        
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        </style>
+
+        <div class="email-body">
+            <p>Dear <strong>${userInfo.first_name} ${userInfo.last_name}</strong>,</p>
+
+            <p>We have received your withdrawal request of <strong>${userInfo.currency}${userInfo.amount}</strong> from your Crescentpips trading account.</p>
+
+            <p>Your request is currently being reviewed. Once approved, the funds will be credited to your designated account promptly.</p>
+
+            <p>If you have any questions or need further assistance, feel free to reach out to our <a href="mailto:support@crescentpips.com" style="color: #007BFF; text-decoration: none;">customer support</a>.</p>
+        </div>
+
+        <div class="email-footer">
+            <p>This email was sent via a secure channel by Crescentpips. If you did not initiate this request, please disregard this message.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
  `,
   });
 };
