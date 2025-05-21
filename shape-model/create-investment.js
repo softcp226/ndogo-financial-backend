@@ -86,9 +86,10 @@ const create_investment = async (req,userdetails) => {
     debit: `-${userdetails.account_type =='KES'?'KSH':"$"}${req.body.investment_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
+    
     status: "success",
   });
-
+console.log(transaction)
 
   Promise.all([transaction.save(),investment.save()])
 

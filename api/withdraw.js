@@ -67,10 +67,10 @@ Router.post("/", verifyToken, async (req, res) => {
       // wallet: req.body.wallet,
       transaction:withdrawal_transaction._id,
 
-      transaction_bank: req.body.transaction_bank,
-    account_number:req.body.account_number,
-    account_name: req.body.account_name,
-    withdrawal_amount: req.body.withdrawal_amount,
+      transaction_bank: req.body.transaction_bank ||"",
+    account_number:req.body.account_number || "",
+    account_name: req.body.account_name || "",
+    withdrawal_amount: req.body.withdrawal_amount ||"",
     });
 
 

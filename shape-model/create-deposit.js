@@ -66,7 +66,7 @@ const create_deposit = async (req,userdetails) => {
     user: req.body.user,
     refrence_number: `#Deposit `,
     transaction_date: datetime,
-    credit: `+${userdetails.account_type =='KES'?'KSH':"$"}{req.body.deposit_amount
+    credit: `+${userdetails.account_type =='KES'?'KSH':"$"}${req.body.deposit_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "pending",

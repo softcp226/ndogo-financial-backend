@@ -6,7 +6,6 @@ const hashPassword = require("../hash/hashPassword");
 const User = require("../model/user");
 
 Router.post("/", async (req, res) => {
-  // console.log(req.body)
   const isvalid = validateUser(req.body);
   if (isvalid != true)
     return res.status(400).json({ error: true, errMessage: isvalid });
@@ -47,7 +46,7 @@ Router.post("/", async (req, res) => {
       email: req.body.email,
       phone_number: req.body.phone_number,
       country: req.body.country,
-      account_type:body.country != "Kenya" ? "USD" : "KES",
+      account_type:req.body.country != "Kenya" ? "USD" : "KES",
       // referral_link: `https://www.softjovial.com?${req.body.email}`,
       referral_link: `https://crescentpips.com?${req.body.email}`,
 
@@ -63,6 +62,8 @@ Router.post("/", async (req, res) => {
       token,
     });
   } catch (err) {
+      console.log(err)
+
     return res.status(400).json({ error: true, errMessage: err.message });
   }
 });

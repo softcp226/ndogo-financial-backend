@@ -17,15 +17,15 @@ const withdrawal_request_Schema = mongoose.Schema({
 
    transaction_bank:{
     type: String,
-    required: true,
+    // required: true,
   },
     account_number:{
     type:String,
-    required: true,
+    // required: true,
   },
     account_name: {
     type:String,
-    required: true,
+    // required: true,
   },
     withdrawal_amount: {
     type:String,

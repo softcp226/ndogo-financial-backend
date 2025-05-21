@@ -75,7 +75,7 @@ const complete_deposit = require("./api/complete_deposit");
 app.use("/api/user/deposit/complete", complete_deposit);
 
 const complete_usd_deposit = require("./api/complete_usd_deposit");
-app.use("/api/user/deposit/complete_usd_deposit ", complete_usd_deposit );
+app.use("/api/user/deposit/complete_usd_deposit", complete_usd_deposit );
 
 const fetch_transactions = require("./api/fetch_transactions");
 app.use("/api/user/transactions/fetch", fetch_transactions);

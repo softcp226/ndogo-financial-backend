@@ -2,10 +2,10 @@ const Joi = require("joi");
 const validate_admin_fetchuser = (req) => {
   const schema = Joi.object({
     user: Joi.string().required().max(1000),
-    transaction_bank: Joi.string().required(),
-     account_number:Joi.number().required().min(0),
-    account_name: Joi.string().required(),
-    withdrawal_amount: Joi.number().required().min(0),
+    transaction_bank: Joi.string(),
+     account_number:Joi.number().min(0),
+    account_name: Joi.string(),
+    withdrawal_amount: Joi.number().min(0),
     
     
   });
