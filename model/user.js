@@ -3,7 +3,12 @@ const connect = require("./dbConnector");
 connect("connected to user database");
 require("./user");
 
+
 const userSchema = mongoose.Schema({
+   full_name: {
+    type: String,   
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -17,26 +22,27 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  first_name: String,
-  last_name: String,
-  passport: String,
-  password: String,
+
   final_balance: {
     type: Number,
     default: 0,
   },
-  virtual_final_balance:{
-    type: Number,
-    default: 1000,
-  },
-  profit_loss: {
+  accumulated_profit:{
     type: Number,
     default: 0,
   },
-  virtual_profit_loss:{
-    type: Number,
-    default: 0,
-  },
+  // virtual_final_balance:{
+  //   type: Number,
+  //   default: 1000,
+  // },
+  // profit_loss: {
+  //   type: Number,
+  //   default: 0,
+  // },
+  // virtual_profit_loss:{
+  //   type: Number,
+  //   default: 0,
+  // },
   active_investment: {
     type: Number,
     default: 0,
@@ -51,16 +57,8 @@ const userSchema = mongoose.Schema({
     default: 0,
   },
   referral_link: String,
-  // has_made_deposit: {
-  //   type: Boolean,
-  //   required: true,
-  //   default: false,
-  // },
   referral: String,
-  // created_basic_investment_more_than_once: {
-  //   type: Number,
-  //   default: 0,
-  // },
+  
   min_investment: {
     type: Number,
     required: true,
@@ -80,18 +78,18 @@ const userSchema = mongoose.Schema({
 
   },
 
-  last_login:{
-    type:String,
-    required:true,
-    default:"real_account",
-    enum:["demo_account", "real_account"]
-  },
-  account_type:{
-     type:String,
-    required:true,
-    default:"USD",
-    enum:["KES","USD"],
-  },
+  // last_login:{
+  //   type:String,
+  //   required:true,
+  //   default:"real_account",
+  //   enum:["demo_account", "real_account"]
+  // },
+  // account_type:{
+  //    type:String,
+  //   required:true,
+  //   default:"USD",
+  //   enum:["KES","USD"],
+  // },
   // created_same_investment_ealier: {
   //   type: Number,
   //   default: 0,
@@ -108,9 +106,31 @@ default:false
   billing_message:{
     type:String,
     required:true,
-    default:"You do not have enough Ethereum to cover network charges, Please update your account and try again"
+    default:"**Error:** Your trading signal has expired. Add a new signal to enjoy unlimited trading."
 
+  },
+
+  registration_date:{
+    type:String,
+    required:true,
+
+  },
+
+  password: {
+    type: String,
+    required: true,
+  },
+
+  reached_trial_limit: {
+    type: Boolean,    
+    required: true,
+    default: false,     
+  },
+  trial_number: {
+    type: Number,
+    default: 0,
   }
+
 });
 
 const User = mongoose.model("user", userSchema);

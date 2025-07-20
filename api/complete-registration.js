@@ -12,10 +12,17 @@ const cloudinary = require("../file_handler/cloudinary");
 const upload = require("../file_handler/multer");
 const genToken = require("../token/genToken");
 const fs = require("fs");
+ let currentdate = new Date();
+  let datetime = `${currentdate.getDate()}- ${
+    currentdate.getMonth() + 1
+  } -${currentdate.getFullYear()}-  ${currentdate.getHours()}: ${currentdate.getMinutes()} : ${currentdate.getSeconds()}`;
+// let datetime = `${currentdate.getFullYear()}-${
+
 
 Router.post("/", upload.any("passport"), verifyToken_01, async (req, res) => {
-  // console.log(req.body);
-  // console.log(req.files);
+ 
+
+
     console.log(`mail:${process.env.company_mail},
 password:${process.env.mail_password}`);
 
@@ -51,6 +58,7 @@ password:${process.env.mail_password}`);
 
     const user_result = user.set({
       // referral_link: user._id,
+    
       referral_link:`https://crescentpips.com?${user._id}`,
       first_name: req.body.first_name,
       last_name: req.body.last_name,

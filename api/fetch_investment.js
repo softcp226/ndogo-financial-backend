@@ -20,7 +20,7 @@ Router.post("/", verifyToken, async (req, res) => {
     const check_inv_exp_result = await check_inv_expiration(req);
     // console.log(await check_inv_exp_result);
 
-    const investments = await Investment.find({ user: req.body.user,virtual:false });
+    const investments = await Investment.find({ user: req.body.user });
     if (investments.length < 1)
       return res.status(404).json({
         error: true,

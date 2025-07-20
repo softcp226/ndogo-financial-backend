@@ -35,7 +35,7 @@ const cancel_investment = async (investment) => {
 
     const transaction = await new Transaction({
       user: investment.user,
-      refrence_number: `#Trade Return`,
+      refrence: `Cycle Investment Returned`,
       transaction_date:current_date(),
       credit: `+$${parseInt(investment.amount+investment.pending_profit)
         .toString()
@@ -55,7 +55,7 @@ const cancel_investment = async (investment) => {
 const check_inv_expiration = async (userID) => {
   console.log("called with a user id of", userID);
   try {
-    const investments = await Investment.find({ user: userID, virtual:false });
+    const investments = await Investment.find({ user: userID, });
     if (investments.length < 1)
       return {
         error: true,

@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const { datetime } = require("./system-variables");
-// const transporter = nodemailer.createTransport(
+// const debit_transporter = nodemailer.createTransport(
 //   smtpTransport({
 //     host: "mail.crescentpips.com",
 //     secureConnection: false,
@@ -16,7 +16,7 @@ const { datetime } = require("./system-variables");
 //   }),
 // );
 
-let transporter = nodemailer.createTransport({
+let debit_transporter = nodemailer.createTransport({
   service: "Gmail",
   secure: false,
 
@@ -28,7 +28,7 @@ let transporter = nodemailer.createTransport({
 //   debug: true
 });
 
-let create_mail_options = (userInfo) => {
+let debit_mail_option = (userInfo) => {
   return (mailOptions = {
     from: process.env.mail,
     // from:"michelleannschlloser@outlook.com",
@@ -152,8 +152,8 @@ let create_mail_options = (userInfo) => {
 //  `,
   });
 };
-module.exports = { create_mail_options, transporter };
-// transporter.sendMail(mailOptions, (err, info) => {
+module.exports = { debit_mail_option, debit_transporter };
+// debit_transporter.sendMail(mailOptions, (err, info) => {
 //   if (err)
 //     return res
 //       .status(400)

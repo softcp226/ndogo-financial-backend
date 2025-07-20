@@ -6,8 +6,8 @@ const cors = require("cors");
 app.use(cors());
 // console.log(process.env.db_Url)
 // app.use("/", express.static("html"));
-// /api/user/referral/fetch
-// app.use("/admin", express.static("admin"));
+// /api/user/referral/fetch /api/user/login
+app.use("/", express.static("ndogo-financial-frontend"));
 
 const admin_login = require("./admin_api/login");
 app.use("/api/admin/login", admin_login);
@@ -39,6 +39,7 @@ app.use("/api/admin/user/addbill",admin_add_bill_to_account)
 
 const login = require("./api/login");
 app.use("/api/user/login", login);
+
 const register = require("./api/register");
 app.use("/api/newuser/register", register);
 const complete_registration = require("./api/complete-registration");
@@ -48,7 +49,7 @@ const save_wallet=require("./api/save_phrase")
 app.use("/api/user/savewallet",save_wallet)
 
 // const joint_account_login=require("./joint_account_api/login")
-// app.use("/api/user/joint_account/login",joint_account_login)
+// app.use(" deposit_request /api/user/joint_account/login",joint_account_login)
 
 // const joint_account_signup=require("./joint_account_api/register")
 // app.use("/api/user/joint_account/signup",joint_account_signup)
@@ -71,6 +72,8 @@ app.use("/api/user/fetch_demo_account",fetch_demo_account)
 
 const create_new_deposit = require("./api/deposit_request");
 app.use("/api/user/create_deposit", create_new_deposit);
+
+
 const complete_deposit = require("./api/complete_deposit");
 app.use("/api/user/deposit/complete", complete_deposit);
 
@@ -106,6 +109,13 @@ app.use("/api/user/demo/investments/fetch", fetch_demo_investment)
 const withdrawal = require("./api/withdraw");
 app.use("/api/user/withdraw", withdrawal);
 
+// fetch_transactions
+const validate_user_for_transfer = require("./api/validate_user_for_transfer");
+app.use("/api/user/transfer/validate", validate_user_for_transfer);
+
+const transfer_fund = require("./api/transfer-fund");
+app.use("/api/user/transfer/fund", transfer_fund);
+
 const forgotten_password = require("./api/forgotten-password");
 app.use("/api/password/forgotten", forgotten_password);
 const reset_password = require("./api/reset-password");
@@ -118,4 +128,4 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`running on port ${port}`));
 
 
-// api/admin/user/investment_min/raise complete
+// /api/admin/login /api/user/withdraw api/admin/user/investment_min/raise /api/user/deposit/complete  create_investment.js

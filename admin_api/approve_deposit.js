@@ -2,8 +2,9 @@ const express = require("express");
 const Router = express.Router();
 const verifyToken = require("../secure-admin-api/verifyToken");
 const Deposit_request = require("../model/deposit_request");
-const Total_deposit = require("../model/total_deposit");
+// const Total_deposit = require("../model/total_deposit");
 const Transaction = require("../model/transaction");
+const create_investment = require("../shape-model/admin_create_investment");
 const Admin = require("../model/admin");
 
 // const validate_admin = require("../validation/validate-admin-fetchuser");
@@ -69,6 +70,8 @@ Router.post("/", verifyToken, async (req, res) => {
         }
         return false;
       }
+
+
       if (isValidObjectId(user.referral)) {
         const referral = await User.findById(user.referral);
         if (referral) {
@@ -85,7 +88,7 @@ Router.post("/", verifyToken, async (req, res) => {
               first_name: referral.first_name,
               last_name: referral.last_name,
               reciever: referral.email,
-              referral_amount: `${user.account_type =="KES" ? "KSH" : "$"}${mypercentage
+              referral_amount: `KSH${mypercentage
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.0`,
 
@@ -107,11 +110,25 @@ Router.post("/", verifyToken, async (req, res) => {
         //end   //
       }
     }
+
+
+    // create_investment()
+
+ await create_investment({
+     
+        user: deposit_request.user,
+        plan_name: deposit_request.selected_plan,
+        investment_amount: deposit_request.deposit_amount,
+    
+ });
+
     // let bonus = parseInt(req.body.deposit_amount) / 2;
     user.set({
-      final_balance:
-        parseInt(user.final_balance) + parseInt(req.body.deposit_amount),
-      // has_made_deposit: true,
+      // final_balance:
+      //   parseInt(user.final_balance) + parseInt(req.body.deposit_amount),
+      // // has_made_deposit: true,
+      active_investment:
+        parseInt(user.active_investment) + parseInt(deposit_request.deposit_amount),    
       made_first_deposit: true,
       first_deposit:
         user.first_deposit > 0
@@ -130,8 +147,8 @@ Router.post("/", verifyToken, async (req, res) => {
 
     // await Deposit_request.findByIdAndDelete(req.body.deposit_request);
 
-    await transaction.save();
-    await user.save();
+   Promise.all([ transaction.save(),
+    user.save() ])
 
     transporter.sendMail(
       create_mail_options({
@@ -160,3 +177,5 @@ Router.post("/", verifyToken, async (req, res) => {
   }
 });
 module.exports = Router;
+
+// react

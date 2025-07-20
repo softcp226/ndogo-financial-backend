@@ -2,14 +2,12 @@ const mongoose = require("mongoose");
 const connect = require("./dbConnector");
 connect("connected to transaction database");
 require("./user");
+require("../model/deposit_request");
+
 const transaction_Schema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
-    required: true,
-  },
-  refrence_number: {
-    type: String,
     required: true,
   },
   transaction_date: {
@@ -17,7 +15,12 @@ const transaction_Schema = mongoose.Schema({
     required: true,
     // default: Date.now(),
   },
- 
+  // deposit_request:{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "deposit_request",
+  //   required: true
+  // },
+ refrence:String,
   debit: String,
   credit: String,
   status: {
@@ -25,12 +28,12 @@ const transaction_Schema = mongoose.Schema({
     required: true,
     enum: ["pending", "success", "failed"],
   },
-  virtual:{
-    type: Boolean,
-    required:true,
-    default:false
+  // virtual:{
+  //   type: Boolean,
+  //   required:true,
+  //   default:false
 
-  }
+  // }
 });
 
 const Transaction = mongoose.model("transaction", transaction_Schema);

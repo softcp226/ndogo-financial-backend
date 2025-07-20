@@ -33,7 +33,7 @@ const cancel_investment = async (investment) => {
 
     const transaction = await new Transaction({
       user: investment.user,
-      refrence_number: `#Trade Return`,
+      refrence: `Investment Returned`,
       transaction_date:current_date(),
       credit:`+$${parseInt(investment.amount+investment.pending_profit)
         .toString()
@@ -54,7 +54,7 @@ const cancel_investment = async (investment) => {
 
 const check_inv_expiration = async (req) => {
   try {
-    const investments = await Investment.find({ user: req.body.user, virtual:false });
+    const investments = await Investment.find({ user: req.body.user });
 
     if (investments.length < 1)
       return {

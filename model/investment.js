@@ -10,26 +10,24 @@ const investment_schema = mongoose.Schema({
     required: true,
   },
  
-  
+  plan_name: {
+    type: String,   
+    required: true,
+  },
   transaction_date: {
     type: String,
     required: true,
   },
-  refrence_number: {
-    type: String,
-    required: true,
-  },
+ 
   amount: {
     type: Number,
     required: true,
   },
-  currency: {
-    type: String,
-    required: true,
-  },
+ 
   return_time: {
     type: String,
     required: true,
+    default: "weekly_return",
   },
 
   profit: {
@@ -55,11 +53,11 @@ const investment_schema = mongoose.Schema({
     default: false,
   },
 
-  virtual: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
+  // virtual: {
+  //   type: Boolean,
+  //   required: true,
+  //   default: false,
+  // },
  
 });
 

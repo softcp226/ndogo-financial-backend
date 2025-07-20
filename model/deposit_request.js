@@ -14,17 +14,7 @@ const deposit_request_Schema = mongoose.Schema({
     required: true,
   },
 
-  payment_method: {
-    type: String,
-    required: true,
-  },
-  payment_method_icon: String,
-  payment_wallet: {
-    type: String,
-    required: true,
-  },
-
-  currency: {
+  selected_plan: {
     type: String,
     required: true,
   },
@@ -33,7 +23,7 @@ const deposit_request_Schema = mongoose.Schema({
     ref: "transaction",
     required: true,
   },
-  transaction_hash: String,
+  receipt:String,
  
 });
 

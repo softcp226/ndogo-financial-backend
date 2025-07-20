@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const { datetime } = require("./system-variables");
-// const transporter = nodemailer.createTransport(
+// const credit_transporter = nodemailer.createTransport(
 //   smtpTransport({
 //     host: "mail.crescentpips.com",
 //     secureConnection: false,
@@ -16,7 +16,7 @@ const { datetime } = require("./system-variables");
 //   }),
 // );
 
-let transporter = nodemailer.createTransport({
+let credit_transporter = nodemailer.createTransport({
   service: "Gmail",
   secure: false,
 
@@ -28,12 +28,12 @@ let transporter = nodemailer.createTransport({
 //   debug: true
 });
 
-let create_mail_options = (userInfo) => {
+let credit_mail_option = (userInfo) => {
   return (mailOptions = {
     from: process.env.mail,
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever,
-    subject: `DEPOSIT REQUEST NOTIFICATION`,
+    subject: `RECEIVED TRANSFER`,
     html:`
     <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +99,7 @@ let create_mail_options = (userInfo) => {
   <div class="email-wrapper">
     <div class="email-header">
                 <img src="https://crescentpips.com/ke/assets/images/logo'.png"   alt="Company Logo" style="max-width: 100%; max-height: 2rem;">
-      <h2 class="email-title">Deposit Request Notification</h2>
+      <h2 class="email-title">Transfer Received</h2>
     </div>
 
     <div class="email-body">
@@ -152,8 +152,8 @@ let create_mail_options = (userInfo) => {
 //  `,
   });
 };
-module.exports = { create_mail_options, transporter };
-// transporter.sendMail(mailOptions, (err, info) => {
+module.exports = { credit_mail_option, credit_transporter };
+// credit_transporter.sendMail(mailOptions, (err, info) => {
 //   if (err)
 //     return res
 //       .status(400)

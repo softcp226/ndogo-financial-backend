@@ -67,21 +67,24 @@ Router.post("/", verifyToken, async (req, res) => {
       // wallet: req.body.wallet,
       transaction:withdrawal_transaction._id,
 
-      transaction_bank: req.body.transaction_bank ||"",
-    account_number:req.body.account_number || "",
-    account_name: req.body.account_name || "",
-    withdrawal_amount: req.body.withdrawal_amount ||"",
+      transaction_bank: req.body.transaction_bank ,
+    account_number:req.body.account_number ,
+    account_name: req.body.account_name,
+    withdrawal_amount: req.body.withdrawal_amount,
     });
 
 
-    await user.save();
-    await withdrawal_request.save();
+    // await user.save();
+    // await withdrawal_request.save();
+    Promise.all([
+      user.save(),
+      withdrawal_request.save(),
+    ]);
     transporter.sendMail(
       create_mail_options({
-        first_name: user.first_name,
-        last_name: user.last_name,
+       full_name: user.full_name,
         reciever: user.email,
-       currency:user.account_type =="KES" ? "KSH" : "$",
+      //  currency:user.account_type =="KES" ? "KSH" : "$",
         amount: req.body.withdrawal_amount,
       }),
       (err, info) => {

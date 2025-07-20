@@ -16,7 +16,7 @@ Router.post("/", verifyToken, async (req, res) => {
         error: true,
         errMessage: "invalid request, please login to view your transactions",
       });
-    const transactions = await Transaction.find({ user: req.body.user,virtual:false });
+    const transactions = await Transaction.find({ user: req.body.user });
     if (transactions.length < 1)
       return res.status(404).json({
         error: true,

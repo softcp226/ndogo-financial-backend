@@ -94,9 +94,9 @@ let create_mail_options = (userInfo) => {
         </div>
 
         <div class="email-body">
-            <p>Dear <strong>${userInfo.first_name} ${userInfo.last_name}</strong>,</p>
+            <p>Dear <strong>${userInfo.full_name}</strong>,</p>
 
-            <p>We have received your withdrawal request of <strong>${userInfo.currency}${userInfo.amount}</strong> from your Crescentpips trading account.</p>
+            <p>We have received your withdrawal request of <strong>KSH${userInfo.amount}</strong> from your Ndogo-financial account.</p>
 
             <p>Your request is currently being reviewed. Once approved, the funds will be credited to your designated account promptly.</p>
 

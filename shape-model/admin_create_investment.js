@@ -10,34 +10,34 @@ const investment_end_date = (req) => {
 
 const return_on_investment = (req) => {
 
-  switch (req.body.plan_name) {
+  switch (req.plan_name) {
     case "Trial Plan":
       const percentage = Math.random() * (7 - 5) + 5;
-      const profit = Math.round(req.body.investment_amount / 100 * percentage);
+      const profit = Math.round(req.investment_amount / 100 * percentage);
       return profit;
       break;
 
     case "Biashara Vault":
       const percentage2 = Math.random() * (15 - 11) + 11;
-      const profit2 = Math.round(req.body.investment_amount / 100 * percentage2);
+      const profit2 = Math.round(req.investment_amount / 100 * percentage2);
       return profit2;
       break;
 
     case "Imara Vault":
       const percentage3 = Math.random() * (16 - 12) + 12;
-      const profit3 = Math.round(req.body.investment_amount / 100 * percentage3);
+      const profit3 = Math.round(req.investment_amount / 100 * percentage3);
       return profit3;
       break;
 
     case "Uwezo Vault":
       const percentage4 = Math.random() * (21 - 18) + 18;   
-      const profit4 = Math.round(req.body.investment_amount / 100 * percentage4);
+      const profit4 = Math.round(req.investment_amount / 100 * percentage4);
       return profit4;       
       break;
      
       case "Legacy Vault":
         const percentage5 = Math.random() * (25 - 20) + 20;     
-        const profit5 = Math.round(req.body.investment_amount / 100 * percentage5);
+        const profit5 = Math.round(req.investment_amount / 100 * percentage5);
         return profit5;
         break;
 
@@ -75,29 +75,30 @@ const return_on_investment = (req) => {
 //   return end_date;
 // }
 
-const create_investment = async (req, userdetails) => {
+const create_investment = async (req) => {
+    console.log("create investment", req);
   let currentdate = new Date();
   let datetime = `${currentdate.getFullYear()}-${currentdate.getMonth() + 1
     }-${currentdate.getDate()} -  ${currentdate.getHours()}: ${currentdate.getMinutes()} : ${currentdate.getSeconds()}`;
   let ref = Math.floor(Math.random() * 1000);
-  console.log("end time", investment_end_date(req));
+  console.log("createinvestment request", req);
 
   const investment = await new Investment({
-    user: req.body.user,
-    plan_name: req.body.plan_name,
+    user: req.user,
+    plan_name: req.plan_name,
     transaction_date: datetime,
     // refrence_number: `Ref#${++ref} `,
-    amount: req.body.investment_amount,
+    amount: req.investment_amount,
     pending_profit: return_on_investment(req),
     investment_end_date: investment_end_date(req),
   });
 
 
   const transaction = await new Transaction({
-    user: req.body.user,
-    refrence: `Reinvested`,
+    user: req.user,
+    refrence: `Invested in ${req.plan_name} Plan(Direct Deposit)`,
     transaction_date: datetime,
-    debit: `-KSH${req.body.investment_amount
+    debit: `-KSH${req.investment_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
 

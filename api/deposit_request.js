@@ -70,6 +70,7 @@ const create_deposit = require("../shape-model/create-deposit");
 const { create_mail_options, transporter } = require("../mailer/deposit_email");
 
 Router.post("/", verifyToken, async (req, res) => {
+  console.log(req.body, "create deposit page");
   const request_isvalid = validate_deposit_request(req.body);
   if (request_isvalid != true)
     return res.status(400).json({ error: true, errMessage: request_isvalid });
@@ -82,11 +83,11 @@ Router.post("/", verifyToken, async (req, res) => {
       });
     // console.log("deposit amount", req.body.deposit_amount);
 
-    if (parseInt(req.body.deposit_amount) < 100)
+    if (parseInt(req.body.deposit_amount) < 1000)
       return res.status(400).json({
         error: true,
         errMessage:
-          `deposit amount must not be lesser than minimum deposit of ${user.account_type=="KES"?"KSH":"$"}100`,
+          `deposit amount must not be lesser than minimum deposit of KSH1,000`,
       });
 
       const create_deposit_request = await create_deposit(req,user);
@@ -94,11 +95,10 @@ Router.post("/", verifyToken, async (req, res) => {
 
     transporter.sendMail(
       create_mail_options({
-        first_name: user.first_name,
-        last_name: user.last_name,
+        full_name:user.full_name,
         reciever: user.email,
-        currency:user.account_type =="KES" ? "KSH" : "$",
         amount: req.body.deposit_amount,
+        plan_name:req.body.plan_name
       }),
       (err, info) => {
         if (err) return "console.log(err.message);"

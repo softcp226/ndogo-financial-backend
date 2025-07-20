@@ -87,6 +87,9 @@ Router.post("/", verifyToken, async (req, res) => {
     //     //     return ++user.created_same_investment_ealier;
     //     // };
 
+        await create_investment(req,user);
+
+
     user.set({
       active_investment:
         parseInt(user.active_investment) + parseInt(req.body.investment_amount),
@@ -101,7 +104,6 @@ Router.post("/", verifyToken, async (req, res) => {
     });
     await user.save();
     // console.log(user.parseInt);
-    await create_investment(req,user);
 
     transporter.sendMail(
       create_mail_options({
