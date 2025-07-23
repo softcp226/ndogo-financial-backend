@@ -83,6 +83,7 @@ Router.post("/", verifyToken, async (req, res) => {
       });
     // console.log("deposit amount", req.body.deposit_amount);
 
+
     if (parseInt(req.body.deposit_amount) < 1000)
       return res.status(400).json({
         error: true,
@@ -97,7 +98,9 @@ Router.post("/", verifyToken, async (req, res) => {
       create_mail_options({
         full_name:user.full_name,
         reciever: user.email,
-        amount: req.body.deposit_amount,
+        amount: req.body.deposit_amount. 
+        toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ".0",
         plan_name:req.body.plan_name
       }),
       (err, info) => {

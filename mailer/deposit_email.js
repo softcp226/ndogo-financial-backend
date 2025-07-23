@@ -1,39 +1,41 @@
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const { datetime } = require("./system-variables");
-// const transporter = nodemailer.createTransport(
-//   smtpTransport({
-//     host: "mail.crescentpips.com",
-//     secureConnection: false,
-//     tls: {
-//       rejectUnauthorized: false,
-//     },
-//     port: 587,
-//     auth: {
-//       user: "support@crescentpips.com",
-//       pass: "crescentpips1@1",
-//     },
-//   }),
-// );
 
-let transporter = nodemailer.createTransport({
-  service: "Gmail",
-  secure: false,
 
-  auth: {
-    user: process.env.company_mail,
-    pass: process.env.mail_password,
-  },
-//    logger: true,
-//   debug: true
-});
+const transporter = nodemailer.createTransport(
+  smtpTransport({
+    host: process.env.host,
+    secureConnection: false,
+    tls: {
+      rejectUnauthorized: false,
+    },
+    port: 587,
+    auth: {
+      user: process.env.company_mail,
+      pass: process.env.mail_password,
+    },
+  }),
+);
+
+// let transporter = nodemailer.createTransport({
+//   service: "Gmail",
+//   secure: false,
+
+//   auth: {
+//     user: process.env.company_mail,
+//     pass: process.env.mail_password,
+//   },
+// //    logger: true,
+// //   debug: true
+// });
 
 let create_mail_options = (userInfo) => {
   return (mailOptions = {
     from: process.env.mail,
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever,
-    subject: `DEPOSIT REQUEST NOTIFICATION`,
+    subject: `DEPOSIT NOTIFICATION`,
     html:`
     <!DOCTYPE html>
 <html lang="en">
@@ -41,86 +43,59 @@ let create_mail_options = (userInfo) => {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Deposit Request Notification</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f6f9fc;
-      font-family: 'Poppins', sans-serif;
-    }
-    .email-wrapper {
-      max-width: 600px;
-      margin: 40px auto;
-      background-color: #ffffff;
-      border-radius: 10px;
-      padding: 30px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e0e0e0;
-    }
-    .email-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .email-header img {
-      height: 40px;
-    }
-    .email-title {
-      font-size: 22px;
-      font-weight: 600;
-      color: #2c3e50;
-      margin: 20px 0 10px;
-    }
-    .email-body {
-      font-size: 16px;
-      color: #555;
-      line-height: 1.6;
-    }
-    .cta-button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
-      background-color: #0c0e28;
-      color: #ffffff;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .email-footer {
-      text-align: center;
-      font-size: 13px;
-      color: #999;
-      margin-top: 40px;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="margin:0; padding:0; background-color:#f2f4f6; font-family:'Inter', sans-serif;">
 
-  <div class="email-wrapper">
-    <div class="email-header">
-                <img src="https://crescentpips.com/ke/assets/images/logo'.png"   alt="Company Logo" style="max-width: 100%; max-height: 2rem;">
-      <h2 class="email-title">Deposit Request Notification</h2>
-    </div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f2f4f6; padding: 30px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff; border-radius:10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow:hidden;">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(90deg, #0c0e28, #1e1f4b); padding: 30px; text-align: center;">
+              <img src="https://ndogo-financial.com/css/assets/logo.jpg" alt="Ndogo-Financial Logo" style="height: 50px;">
+              <h1 style="color:#ffffff; font-size: 22px; margin-top: 20px;">Deposit Request Notification</h1>
+            </td>
+          </tr>
 
-    <div class="email-body">
-      <p>Dear <strong>${userInfo.full_name}</strong>,</p>
+          <!-- Body -->
+          <tr>
+            <td style="padding: 30px; color: #333333; font-size: 16px; line-height: 1.6;">
+              <p>Dear <strong>${userInfo.full_name}</strong>,</p>
 
-      <p>We have received your deposit request of <strong>KSH${userInfo.amount} for the ${userInfo.plan_name}</p>
+              <p>We have received your deposit request of <strong>KSH${userInfo.amount}</strong> for the ${userInfo.plan_name}</p>
 
-      <p>Please proceed to complete your deposit to ensure uninterrupted access to your trading account.</p>
+              <p>Please proceed to complete your deposit to ensure uninterrupted access.</p>
 
-      
+              <p>For more information, please log in to your account.</p>
 
-      <p>For more information, please log in to your account.</p>
-    </div>
+              <p style="text-align: center; margin-top: 30px;">
+                <a href="https://ndogo-financial.com/signin.html" style="background-color:#0c0e28; color:#ffffff; padding:12px 24px; text-decoration:none; border-radius:6px; font-weight:600;">
+                  Sign In
+                </a>
+              </p>
+            </td>
+          </tr>
 
-    <div class="email-footer">
-      <p>This message was generated via ndogo-financial's secure system. If you did not initiate this request, no action is required.</p>
-    </div>
-  </div>
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 20px 30px; background-color:#f9fafb; color:#999999; font-size:13px; text-align:center;">
+              This message was generated via Ndogo-Financial's secure system. If you did not initiate this request, no action is required.
+              <br><br>
+              © 2025 Ndogo-Financial. All rights reserved.
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 
 </body>
 </html>
+
 `
 
 //     html: `

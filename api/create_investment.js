@@ -22,6 +22,30 @@ Router.post("/", verifyToken, async (req, res) => {
         errMessage: "invalid request, please login to create an investment",
       });
 
+
+    if(user.reached_trial_limit ==true || user.trial_number > 4 ){
+      if (parseInt(req.body.deposit_amount) < 5000){
+      
+
+    user.set({
+      reached_trial_limit: true,
+    //  trial_number: user.trial_number + 1,
+    })
+user.save();
+
+    return res.status(400).json({
+      error: true,    
+      errMessage: 
+        "You have reached your trial limit for the trial vault plan,  deposit a minimum of KSH5,000 to start trading on Biashara Vault",
+    });
+
+
+  }
+    }
+  // user.set({
+   
+  // })
+
     if (parseInt(req.body.investment_amount) > user.final_balance)
       return res.status(400).json({
         error: true,
@@ -94,7 +118,8 @@ Router.post("/", verifyToken, async (req, res) => {
       active_investment:
         parseInt(user.active_investment) + parseInt(req.body.investment_amount),
       final_balance: user.final_balance - parseInt(req.body.investment_amount),
-
+      reached_trial_limit: user.trial_number > 4 ? true : false,  
+      trial_number: user.trial_number + 1, 
       // created_same_investment_ealier: check_created_same_investment_earlier(),
       // prev_investment:
       //   parseInt(user.prev_investment) <
@@ -107,8 +132,9 @@ Router.post("/", verifyToken, async (req, res) => {
 
     transporter.sendMail(
       create_mail_options({
-        first_name: user.first_name,
-        last_name: user.last_name,
+        // first_name: user.first_name,
+        // last_name: user.last_name,
+        full_name: user.full_name,
         reciever: user.email,
       }),
       (err, info) => {

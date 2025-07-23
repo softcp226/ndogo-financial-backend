@@ -4,6 +4,11 @@ const validateUser = require("../validation/validate_user01");
 const genToken = require("../token/genToken");
 const hashPassword = require("../hash/hashPassword");
 const User = require("../model/user");
+const {
+  create_mail_options,
+  transporter,
+} = require("../mailer/reg_success_mail");
+
 
 Router.post("/", async (req, res) => {
   console.log(req.body)
@@ -43,6 +48,22 @@ Router.post("/", async (req, res) => {
     });
 
     const result = await newUser.save();
+
+        transporter.sendMail(
+      create_mail_options({
+        full_name: req.body.full_name,
+        reciever: req.body.email,
+      }),
+      (err, info) => {
+        if (err) return console.log(`there was an error on the server${err}`);
+        console.log(info);
+        // return res.status(400).json({
+        //   error: true,
+        //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
+        // });
+      },
+    );
+
     // console.log("user", result);
     const token = genToken(result._id);
     res.status(200).json({

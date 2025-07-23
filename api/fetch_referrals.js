@@ -16,7 +16,7 @@ Router.post("/", verifyToken, async (req, res) => {
         errMessage: "invalid request, please login to view your referral",
       });
 
-    const referral = await User.find({ referral: req.body.user });
+    const referral = await User.find({ referral: req.body.user },'full_name final_balance active_investment referral_link registration_date');
     if (referral.length <= 0)
       return res
         .status(400)

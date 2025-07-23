@@ -1,126 +1,102 @@
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const { datetime } = require("./system-variables");
-// const transporter = nodemailer.createTransport(
-//   smtpTransport({
-//     host: "mail.softjovial.com",
-//     secureConnection: false,
-//     tls: {
-//       rejectUnauthorized: false,
-//     },
-//     port: 587,
-//     auth: {
-//       user: "support@softjovial.com",
-//       pass: process.env.mail_password,
-//     },
-//   }),
-// );
 
-let transporter = nodemailer.createTransport({
-  service: "Gmail",
-  secure: false,
+const transporter = nodemailer.createTransport(
+  smtpTransport({
+    host: process.env.host,
+    secureConnection: false,
+    tls: {
+      rejectUnauthorized: false,
+    },
+    port: 587,
+    auth: {
+      user: process.env.company_mail,
+      pass: process.env.mail_password,
+    },
+  }),
+);
 
-  auth: {
-    user: process.env.company_mail,
-    pass: process.env.mail_password,
-  },
-});
+
+// let transporter = nodemailer.createTransport({
+//   service: "Gmail",
+//   secure: false,
+
+//   auth: {
+//     user: process.env.company_mail,
+//     pass: process.env.mail_password,
+//   },
+// });
 
 let create_mail_options = (userInfo) => {
   return (mailOptions = {
     from: userInfo.reciever,
     // from:"michelleannschlloser@outlook.com",
     to: userInfo.reciever_mail,
-    subject: `PASSWORD RECOVERY REQUEST`,
+    subject: `PASSWORD RECOVERY`,
     //   text:"just wanna know if this works",
     html: `
      <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Password Recovery</title>
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-        body {
-          margin: 0;
-          padding: 0;
-          background-color: #f6f9fc;
-          font-family: 'Poppins', sans-serif;
-        }
-        .email-wrapper {
-          max-width: 600px;
-          margin: 40px auto;
-          background-color: #ffffff;
-          border-radius: 10px;
-          padding: 30px;
-          box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-          border: 1px solid #e0e0e0;
-        }
-        .email-header {
-          text-align: center;
-          margin-bottom: 30px;
-        }
-        .email-header img {
-          height: 40px;
-        }
-        .email-title {
-          font-size: 22px;
-          font-weight: 600;
-          color: #2c3e50;
-          margin: 20px 0 10px;
-        }
-        .email-body {
-          font-size: 16px;
-          color: #555;
-          line-height: 1.6;
-        }
-        .btn {
-          display: inline-block;
-          padding: 12px 20px;
-          background-color: #0c0e28;
-          color: #ffffff !important;
-          border-radius: 5px;
-          text-decoration: none;
-          margin: 20px 0;
-        }
-        .email-footer {
-          text-align: center;
-          font-size: 13px;
-          color: #999;
-          margin-top: 40px;
-        }
-      </style>
-    </head>
-    <body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Recovery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0; padding:0; background-color:#f2f4f6; font-family:'Inter', sans-serif;">
 
-      <div class="email-wrapper">
-        <div class="email-header">
-                <img src="https://crescentpips.com/ke/assets/images/logo'.png"   alt="Company Logo" style="max-width: 100%; max-height: 2rem;">
-          <h2 class="email-title">Account Recovery</h2>
-        </div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f2f4f6; padding: 30px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff; border-radius:10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow:hidden;">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(90deg, #0c0e28, #1e1f4b); padding: 30px; text-align: center;">
+              <img src="https://ndogo-financial.com/css/assets/logo.jpg" alt="Ndogo-Financial Logo" style="height: 50px;">
+              <h1 style="color:#ffffff; font-size: 22px; margin-top: 20px;">Password Reset Request</h1>
+            </td>
+          </tr>
 
-        <div class="email-body">
-          <p>Dear <strong>${userInfo.first_name} ${userInfo.last_name}</strong>,</p>
-          <p>We received a request to reset your account password. If you initiated this request, please click the button below:</p>
+          <!-- Body -->
+          <tr>
+            <td style="padding: 30px; color: #333333; font-size: 16px; line-height: 1.6;">
+              <p>Dear <strong>${userInfo.full_name}</strong>,</p>
 
-          <p style="text-align: center;">
-            <a href="${userInfo.reset_link}" class="btn">Reset Password</a>
-          </p>
+              <p>We received a request to reset the password for your Ndogo-Financial account. If you made this request, you can reset your password securely by clicking the button below:</p>
 
-          <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
-          <p style="word-break: break-all;">${userInfo.reset_link}</p>
+              <p style="text-align: center; margin: 30px 0;">
+                <a href="${userInfo.reset_link}" style="background-color:#0c0e28; color:#ffffff; padding:12px 24px; text-decoration:none; border-radius:6px; font-weight:600;">
+                  Reset Password
+                </a>
+              </p>
 
-          <p>If you didn’t request a password reset, you can safely ignore this message.</p>
-        </div>
+              <p>If the button above doesn’t work, copy and paste the link below into your browser:</p>
+              <p style="word-break: break-word; color: #555;">${userInfo.reset_link}</p>
 
-        <div class="email-footer">
-            <p>This email was sent via a secure channel by Crescentpips. If you did not initiate this request, please disregard this message.</p>
-        </div>
-      </div>
+              <p>If you did not request a password reset, you may safely ignore this email. Your account remains secure.</p>
+            </td>
+          </tr>
 
-    </body>
-    </html>
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 20px 30px; background-color:#f9fafb; color:#999999; font-size:13px; text-align:center;">
+              This message was sent from Ndogo-Financial's secure platform. No action is required if you did not request this password reset.
+              <br><br>
+              © 2025 Ndogo-Financial. All rights reserved.
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+
+
  `,
   });
 };

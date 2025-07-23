@@ -24,10 +24,11 @@ Router.post("/", verifyToken, async (req, res) => {
       // const email_exist = await User.findOne({email:req.body.email});
       // if(email_exist)return res.status(400).json({error:true, errMessage:`You can't use the email ${req.body.email} as it is already in use `})
     user.set({
-      first_name: req.body.first_name,
-      last_name:req.body.last_name,
+      full_name: req.body.full_name,
+      // last_name:req.body.last_name,
       email: req.body.email,
       phone_number: req.body.phone_number,
+      country: req.body.country,
     });
     await user.save();
     return res.status(400).json({ error: false, message: user });
@@ -36,6 +37,10 @@ Router.post("/", verifyToken, async (req, res) => {
     res.status(400).json({ error: true, errMessage: error.message });
   }
 });
+
+
+
+
 
 Router.post(
   "/setprofile",

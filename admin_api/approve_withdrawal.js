@@ -81,8 +81,7 @@ Router.post("/", verifyToken, async (req, res) => {
           referral.save();
           transporter2.sendMail(
             create_mail_options2({
-              first_name: referral.first_name,
-              last_name: referral.last_name,
+              full_name:referral.full_name,
               reciever: referral.email,
               referral_amount: `$${mypercentage
                 .toString()
@@ -132,10 +131,12 @@ Router.post("/", verifyToken, async (req, res) => {
 
     transporter.sendMail(
       create_mail_options({
-        first_name: user.first_name,
-        last_name: user.last_name,
+        full_name: user.full_name,
         reciever: user.email,
-        currency:user.country =="Kenya"?"KES":"$"  
+        amount: `KSH${req.body.deposit_amount
+          .toString()     
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.0`,
+        // currency:user.country =="Kenya"?"KES":"$"  
       }),
       (err, info) => {
         if (err) return console.log(err.message);

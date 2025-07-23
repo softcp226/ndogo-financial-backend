@@ -103,11 +103,12 @@ Router.post("/", verifyToken, async (req, res) => {
        full_name: user.full_name,
         reciever: user.email,
       //  currency:user.account_type =="KES" ? "KSH" : "$",
-        amount: req.body.transfer_amount,
+        amount: req.body.transfer_amount.toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       }),
       (err, info) => {
-        if (err) return "console.log(err.message);"
-   
+        if (err) return console.log(err.message);
+   console.log("debit mail sent", info.response);
       }
     );
 
@@ -116,12 +117,14 @@ Router.post("/", verifyToken, async (req, res) => {
         credit_mail_option({        
             full_name: user_for_transfer.full_name,
             reciever: user_for_transfer.email,      
-            amount: req.body.transfer_amount,
+            amount: req.body.transfer_amount.toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
             sender: user.full_name   
         }),
       (err, info) => {          
-        if (err) return "console.log(err.message);"
-       
+        if (err) return console.log(err.message);
+          console.log("credit mail sent", info.response);
+
       }         
     );
 

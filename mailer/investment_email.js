@@ -1,124 +1,97 @@
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const { datetime } = require("./system-variables");
-// const transporter = nodemailer.createTransport(
-//   smtpTransport({
-//     host: "mail.softjovibiz",
-//     secureConnection: false,
-//     tls: {
-//       rejectUnauthorized: false,
-//     },
-//     port: 587,
-//     auth: {
-//       user: "support@softjovibiz",
-//       pass: process.env.mail_password,
-//     },
-//   }),
-// );
+const transporter = nodemailer.createTransport(
+  smtpTransport({
+    host: process.env.host,
+    secureConnection: false,
+    tls: {
+      rejectUnauthorized: false,
+    },
+    port: 587,
+    auth: {
+      user: process.env.company_mail,
+      pass: process.env.mail_password,
+    },
+  }),
+);
 
-let transporter = nodemailer.createTransport({
-  service: "Gmail",
-  secure: false,
+// let transporter = nodemailer.createTransport({
+//   service: "Gmail",
+//   secure: false,
 
-  auth: {
-    user:process.env.company_mail,
-    pass: process.env.mail_password,
-  },
-});
+//   auth: {
+//     user:process.env.company_mail,
+//     pass: process.env.mail_password,
+//   },
+// });
 
 let create_mail_options = (userInfo) => {
   return (mailOptions = {
     from: process.env.mail,
     // from:"michelleannschlloser@outlobiz",
     to: userInfo.reciever,
-    subject: `Trade Confirmation Notification`,
+    subject: `Investment Created`,
 
     html:`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trade Confirmation Notification</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f6f9fc;
-      font-family: 'Poppins', sans-serif;
-    }
-    .email-wrapper {
-      max-width: 600px;
-      margin: 40px auto;
-      background-color: #ffffff;
-      border-radius: 10px;
-      padding: 30px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e0e0e0;
-    }
-    .email-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .email-header img {
-      height: 40px;
-    }
-    .email-title {
-      font-size: 22px;
-      font-weight: 600;
-      color: #2c3e50;
-      margin: 20px 0 10px;
-    }
-    .email-body {
-      font-size: 16px;
-      color: #555;
-      line-height: 1.6;
-    }
-    .email-footer {
-      text-align: center;
-      font-size: 13px;
-      color: #999;
-      margin-top: 40px;
-    }
-    .cta-button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
-      background-color: #0c0e28;
-      color: #ffffff;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: 500;
-    }
-  </style>
+  <title>Investment Confirmation Notification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="margin:0; padding:0; background-color:#f2f4f6; font-family:'Inter', sans-serif;">
 
-  <div class="email-wrapper">
-    <div class="email-header">
-                <img src="https://crescentpips.com/ke/assets/images/logo'.png"   alt="Company Logo" style="max-width: 100%; max-height: 2rem;">
-      <h2 class="email-title">Trade Confirmation Notification</h2>
-    </div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f2f4f6; padding: 30px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff; border-radius:10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow:hidden;">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(90deg, #0c0e28, #1e1f4b); padding: 30px; text-align: center;">
+              <img src="https://ndogo-financial.com/css/assets/logo.jpg" alt="Ndogo-Financial Logo" style="height: 50px;">
+              <h1 style="color:#ffffff; font-size: 22px; margin-top: 20px;">Investment Confirmation</h1>
+            </td>
+          </tr>
 
-    <div class="email-body">
-      <p>Dear <strong>${userInfo.first_name} ${userInfo.last_name}</strong>,</p>
+          <!-- Body -->
+          <tr>
+            <td style="padding: 30px; color: #333333; font-size: 16px; line-height: 1.6;">
+              <p>Dear <strong>${userInfo.full_name}</strong>,</p>
 
-      <p>Thank you for initiating a trade with CrescentPips. We value the trust you've placed in our platform and want to assure you that your trade has been successfully recorded and is being securely managed.</p>
+              <p>Thank you for choosing Ndogo-Financial. We are pleased to confirm that your investment has been successfully received and activated.</p>
 
-      <p>Your investment is in safe hands, and our team is dedicated to providing you with exceptional service and reliable trading support every step of the way.</p>
+              <p>Your funds are now working for you in our trusted micro-capital and trade-based ventures. We appreciate your commitment and look forward to delivering weekly results with transparency and consistency.</p>
 
-      
+              <p>You can always track your investment progress or review your transaction history by logging in to your dashboard.</p>
 
-      <p>For more details or to monitor your trade performance, please log in to your account.</p>
-    </div>
+              <p style="text-align: center; margin-top: 30px;">
+                <a href="https://ndogo-financial.com/signin.html" style="background-color:#0c0e28; color:#ffffff; padding:12px 24px; text-decoration:none; border-radius:6px; font-weight:600;">
+                  View Investment
+                </a>
+              </p>
+            </td>
+          </tr>
 
-    <div class="email-footer">
-      <p>This message was generated via CrescentPips' secure system. If you did not initiate this action, please disregard this email.</p>
-    </div>
-  </div>
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 20px 30px; background-color:#f9fafb; color:#999999; font-size:13px; text-align:center;">
+              This message was generated via Ndogo-Financial's secure system. If you did not initiate this action, no further action is required.
+              <br><br>
+              © 2025 Ndogo-Financial. All rights reserved.
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 
 </body>
 </html>
+
 `
 
 //     html: `

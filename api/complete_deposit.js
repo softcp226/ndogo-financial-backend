@@ -53,14 +53,20 @@ Router.post("/", upload.any("receipt"),verifyToken, async (req, res) => {
       });
 
     const result = deposit_request_result.set({
-      transaction_hash: receipt_url.url,
+      receipt: receipt_url.url,
     });
     await result.save();
 
     transporter.sendMail(
       create_mail_options({
-        first_name: user.first_name,
-        last_name: user.last_name,
+        // first_name: user.first_name,
+        // last_name: user.last_name,
+        full_name: user.full_name,
+        amount: `KSH${deposit_request_result.deposit_amount
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.0`,
+
+          plan_name: deposit_request_result.selected_plan,
         reciever: user.email,
       }),
       (err, info) => {

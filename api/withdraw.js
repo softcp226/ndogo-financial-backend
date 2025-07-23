@@ -20,6 +20,26 @@ Router.post("/", verifyToken, async (req, res) => {
         errMessage: "invalid request, please login again to make a withdrawal",
       });
 
+        if(user.reached_trial_limit ==true || user.trial_number > 4 ){
+    user.set({
+      reached_trial_limit: true,
+    //  trial_number: user.trial_number + 1,
+    })
+
+    return res.status(400).json({
+      error: true,    
+      errMessage: 
+        "You have reached your trial limit for the trial vault plan,  deposit a minimum of KSH5,000 to start trading on Biashara Vault",
+    });
+
+
+  }
+
+  // user.set({
+  //     // reached_trial_limit: true,
+  //   })
+
+
     if (parseInt(req.body.withdrawal_amount) > user.final_balance)
       return res.status(400).json({
         error: true,
@@ -50,6 +70,7 @@ Router.post("/", verifyToken, async (req, res) => {
 
     user.set({
       final_balance: user.final_balance - parseInt(req.body.withdrawal_amount),
+
     });
     let currentdate = new Date();
     let datetime = `${currentdate.getFullYear()}-${
@@ -85,7 +106,10 @@ Router.post("/", verifyToken, async (req, res) => {
        full_name: user.full_name,
         reciever: user.email,
       //  currency:user.account_type =="KES" ? "KSH" : "$",
-        amount: req.body.withdrawal_amount,
+        amount: req.body.withdrawal_amount.toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ","
+      ) + ".0",
+
       }),
       (err, info) => {
         if (err) return "console.log(err.message);"
