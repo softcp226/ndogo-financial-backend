@@ -8,7 +8,7 @@ const { create_mail_options, transporter } = require("../mailer/withdrawal");
 const create_withdrawal_transaction = require("../shape-model/create-withdrawal-transaction");
 
 Router.post("/", verifyToken, async (req, res) => {
-  console.log(req.body)
+  console.log("withdrawal",req.body)
   const request_isvalid = validate_withdrawal(req.body);
   if (request_isvalid != true)
     return res.status(400).json({ error: true, errMessage: request_isvalid });
@@ -88,10 +88,9 @@ Router.post("/", verifyToken, async (req, res) => {
       // wallet: req.body.wallet,
       transaction:withdrawal_transaction._id,
 
-      transaction_bank: req.body.transaction_bank ,
-    account_number:req.body.account_number ,
-    account_name: req.body.account_name,
     withdrawal_amount: req.body.withdrawal_amount,
+    withdrawal_method: req.body.withdrawal_method,
+    wallet_address: req.body.wallet_address,
     });
 
 

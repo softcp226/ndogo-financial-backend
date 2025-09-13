@@ -9,7 +9,7 @@ const { create_mail_options, transporter } = require("../mailer/deposit_email");
 const validate_complete_deposit = require("../validation/validate_complete_deposit");
 const Deposit_request = require("../model/deposit_request");
 
-Router.post("/", upload.any("receipt"),verifyToken, async (req, res) => {
+Router.post("/",verifyToken, async (req, res) => {
 
 
    const request_isvalid = validate_complete_deposit(req.body);
@@ -32,28 +32,13 @@ Router.post("/", upload.any("receipt"),verifyToken, async (req, res) => {
       return res.status(404).json({
         error: true,
         errMessage:
-          "deposit not found,before you submit a transction Receipt you need to first create a deposit ",
+          "deposit not found,before you submit a transction Hash you need to first create a deposit ",
       });
 
-    const uploader = async (path) => await cloudinary.uploads(path, "receipt");
-    let receipt_url;
-    const files = req.files;
-    for (const file of files) {
-      const { path } = file;
-      const newPath = await uploader(path);
-      receipt_url = newPath;
-      fs.unlinkSync(path);
-    }
-    console.log(receipt_url);
-    if (receipt_url.error)
-      return res.status(400).json({
-        error: true,
-        errMessage:
-          "Something went wrong in the server while trying to upload your receipt, please make sure receipt is an image and try again",
-      });
+    
 
     const result = deposit_request_result.set({
-      receipt: receipt_url.url,
+      receipt: req.body.hash,
     });
     await result.save();
 

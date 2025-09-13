@@ -84,11 +84,11 @@ Router.post("/", verifyToken, async (req, res) => {
     // console.log("deposit amount", req.body.deposit_amount);
 
 
-    if (parseInt(req.body.deposit_amount) < 1000)
+    if (parseInt(req.body.deposit_amount) < 5)
       return res.status(400).json({
         error: true,
         errMessage:
-          `deposit amount must not be lesser than minimum deposit of KSH1,000`,
+          `deposit amount must not be lesser than minimum deposit of $5`,
       });
 
       const create_deposit_request = await create_deposit(req,user);

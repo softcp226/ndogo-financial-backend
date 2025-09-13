@@ -66,7 +66,7 @@ const create_deposit = async (req,userdetails) => {
     user: req.body.user,
     refrence: `Joined a cycle`,
     transaction_date: datetime,
-    credit: `+KSH${req.body.deposit_amount
+    credit: `+$${req.body.deposit_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "pending",
@@ -76,8 +76,14 @@ const create_deposit = async (req,userdetails) => {
     user: req.body.user,
     deposit_amount: req.body.deposit_amount,
     selected_plan: req.body.plan_name,
-    // payment_method: select_payment_method(req.body.payment_method)
-       transaction: transaction._id,
+     payment_method: select_payment_method(req.body.payment_method)
+      .payment_method,
+    payment_method_icon: select_payment_method(req.body.payment_method)
+      .payment_method_icon,
+    payment_wallet: select_payment_method(req.body.payment_method)
+      .payment_wallet,
+
+    transaction: transaction._id,
     
   });
 
@@ -91,3 +97,5 @@ const create_deposit = async (req,userdetails) => {
 
 module.exports = create_deposit;
 
+
+// $

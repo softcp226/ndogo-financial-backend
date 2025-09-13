@@ -16,7 +16,7 @@ const create_transfer_transaction = async (req,user,user_for_transfer) => {
     user: user._id,
     refrence: `Transfer to ${user_for_transfer.full_name}`,
     transaction_date: datetime,
-    debit: `-KSH${req.body.transfer_amount
+    debit: `-$${req.body.transfer_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "success",
@@ -27,7 +27,7 @@ const create_transfer_transaction = async (req,user,user_for_transfer) => {
     refrence: `Transfer from ${user.full_name}`,
     transaction_date: datetime,
         
-    credit: `+KSH${req.body.transfer_amount
+    credit: `+$${req.body.transfer_amount
       .toString()       
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "success",  
@@ -51,3 +51,6 @@ const create_transfer_transaction = async (req,user,user_for_transfer) => {
 };
 
 module.exports = create_transfer_transaction;
+
+
+// $

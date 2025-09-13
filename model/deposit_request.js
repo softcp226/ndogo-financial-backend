@@ -18,6 +18,21 @@ const deposit_request_Schema = mongoose.Schema({
     type: String,
     required: true,
   },
+
+payment_method: {
+    type: String,
+    required: true,       
+  },
+  payment_method_icon: {
+    type: String,         
+    required: true,
+  },
+  payment_wallet: {
+    type: String, 
+    required: true,
+  },
+
+
   transaction: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "transaction",

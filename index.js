@@ -128,4 +128,4 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`running on port ${port}`));
 
 
-///api/user/referral/fetch /api/user/updateprofileInfo /api/user/deposit/complete  create_investment.js
+///api/user/create_investment  api/user/referral/fetch /api/user/updateprofileInfo /api/user/deposit/complete  create_investment.js

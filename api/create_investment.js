@@ -10,7 +10,7 @@ const {
 } = require("../mailer/investment_email");
 
 Router.post("/", verifyToken, async (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   const request_isvalid = validate_create_investment(req.body);
   if (request_isvalid != true)
     return res.status(400).json({ error: true, errMessage: request_isvalid });
@@ -23,20 +23,21 @@ Router.post("/", verifyToken, async (req, res) => {
       });
 
 
-    if(user.reached_trial_limit ==true || user.trial_number > 4 ){
-      if (parseInt(req.body.deposit_amount) < 5000){
+    if(user.reached_trial_limit ==true || user.trial_number > 5 ){
+      if (parseInt(req.body.deposit_amount) <=49){
       
 
     user.set({
-      reached_trial_limit: true,
-    //  trial_number: user.trial_number + 1,
+     
+       reached_trial_limit: user.trial_number > 5 ? true : false,  
+     trial_number: user.trial_number + 1, 
     })
 user.save();
 
     return res.status(400).json({
       error: true,    
       errMessage: 
-        "You have reached your trial limit for the trial vault plan,  deposit a minimum of KSH5,000 to start trading on Biashara Vault",
+        "You have reached your trial limit for the trial vault plan,  deposit a minimum of $50 to start trading on Standard Oil Vault plan",
     });
 
 
@@ -113,13 +114,22 @@ user.save();
 
         await create_investment(req,user);
 
+const return_trial_boolean=(deposit_amount)=>{
+ if(parseInt(deposit_amount) <= 49){
+if(user.trial_number > 5)return true;
+return false
+}   
+
+return false
+}
 
     user.set({
       active_investment:
         parseInt(user.active_investment) + parseInt(req.body.investment_amount),
       final_balance: user.final_balance - parseInt(req.body.investment_amount),
-      reached_trial_limit: user.trial_number > 4 ? true : false,  
-      trial_number: user.trial_number + 1, 
+      trial_number: req.body.investment_amount <= 49 ? user.trial_number+1 : user.trial_number, 
+      reached_trial_limit: return_trial_boolean(req.body.investment_amount) 
+
       // created_same_investment_ealier: check_created_same_investment_earlier(),
       // prev_investment:
       //   parseInt(user.prev_investment) <
@@ -152,7 +162,7 @@ user.save();
       message: "success!, you just created an investment",
     });
   } catch (error) {
-    // console.log(error)
+    console.log(error)
     res.status(400).json({ error: true, errMessage: error.message });
   }
 });

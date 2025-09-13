@@ -3,39 +3,39 @@ const Transaction = require("../model/transaction");
 
 const investment_end_date = (req) => {
   let date3 = new Date();
-  date3.setDate(date3.getDate() + 7);
+  date3.setDate(date3.getDate() + 3);
   let end_date3 = date3.getTime();
   return end_date3;
 }
 
 const return_on_investment = (req) => {
-
+console.log("req body on create investment", req.body);
   switch (req.body.plan_name) {
-    case "Trial Plan":
-      const percentage = Math.random() * (7 - 5) + 5;
+    case "Starter Oil Vault":
+      const percentage = Math.random() * (10 - 9) + 9;
       const profit = Math.round(req.body.investment_amount / 100 * percentage);
       return profit;
       break;
 
-    case "Biashara Vault":
+    case "Standard Oil Vault":
       const percentage2 = Math.random() * (15 - 11) + 11;
       const profit2 = Math.round(req.body.investment_amount / 100 * percentage2);
       return profit2;
       break;
 
-    case "Imara Vault":
+    case "Premium Oil Vault":
       const percentage3 = Math.random() * (16 - 12) + 12;
       const profit3 = Math.round(req.body.investment_amount / 100 * percentage3);
       return profit3;
       break;
 
-    case "Uwezo Vault":
+    case "Elite Oil Vault":
       const percentage4 = Math.random() * (21 - 18) + 18;   
       const profit4 = Math.round(req.body.investment_amount / 100 * percentage4);
       return profit4;       
       break;
      
-      case "Legacy Vault":
+      case "Legacy Oil Vault":
         const percentage5 = Math.random() * (25 - 20) + 20;     
         const profit5 = Math.round(req.body.investment_amount / 100 * percentage5);
         return profit5;
@@ -97,7 +97,7 @@ const create_investment = async (req, userdetails) => {
     user: req.body.user,
     refrence: `Reinvested`,
     transaction_date: datetime,
-    debit: `-KSH${req.body.investment_amount
+    debit: `-$${req.body.investment_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
 
@@ -110,3 +110,6 @@ const create_investment = async (req, userdetails) => {
   return investment;
 };
 module.exports = create_investment;
+
+
+// KSH

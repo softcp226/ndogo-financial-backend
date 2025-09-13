@@ -15,7 +15,7 @@ const create_withdrawal_transaction = async (req,userdetails) => {
     user: req.body.user,
     refrence: `Withdrawal `,
     transaction_date: datetime,
-    debit: `-KSH${req.body.withdrawal_amount
+    debit: `-$${req.body.withdrawal_amount
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
     status: "pending",
@@ -26,3 +26,9 @@ const create_withdrawal_transaction = async (req,userdetails) => {
 };
 
 module.exports = create_withdrawal_transaction;
+
+
+
+
+
+// $

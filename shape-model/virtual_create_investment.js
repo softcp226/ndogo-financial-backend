@@ -96,3 +96,6 @@ const create_investment = async (req) => {
   return investment;
 };
 module.exports = create_investment;
+
+
+// KSH

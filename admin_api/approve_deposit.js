@@ -62,12 +62,14 @@ Router.post("/", verifyToken, async (req, res) => {
 
 
       
-    if(user.reached_trial_limit ==true || user.trial_number > 4 ){
+    if(user.reached_trial_limit ==true || user.trial_number > 5 ){
 
-      if (parseInt(req.body.deposit_amount) < 5000){
+      if (parseInt(req.body.deposit_amount) <= 49){
     user.set({
-      reached_trial_limit: true,
+      // reached_trial_limit: true,
     //  trial_number: user.trial_number + 1,
+ reached_trial_limit: user.trial_number > 5 ? true : false,  
+  trial_number: user.trial_number + 1, 
     })
 user.save()
 
@@ -104,18 +106,22 @@ user.save()
 
   }
 
-  user.set({
-      reached_trial_limit: user.trial_number > 4 ? true : false,  
+  if(parseInt(req.body.deposit_amount) < 5000){
+ user.set({
+      reached_trial_limit: user.trial_number > 5 ? true : false,  
      trial_number: user.trial_number + 1, 
   })
   await user.save()
+  }
+
+ 
 
 
 
 
 
 
-    if (user.made_first_deposit != true) {
+    // if (user.made_first_deposit != true) {
       // Requiring ObjectId from mongoose npm package
       const ObjectId = require("mongoose").Types.ObjectId;
 
@@ -139,7 +145,7 @@ user.save()
             referral_bonus:
               parseInt(referral.referral_bonus) + parseInt(mypercentage),
           });
-          referral.save();
+      referral.save();
           transporter2.sendMail(
             create_mail_options2({
               full_name: referral.full_name,
@@ -165,9 +171,11 @@ user.save()
 
         //end   //
       }
-    }
+    // }
 
-
+// console.log("Creating investment for user ID:", deposit_request.user);
+// console.log("Actual user ID:", user._id);
+// console.log("Referral ID:", user.referral);
     // create_investment()
 
  await create_investment({

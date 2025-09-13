@@ -15,23 +15,26 @@ const withdrawal_request_Schema = mongoose.Schema({
     required: true,
   },
 
-   transaction_bank:{
-    type: String,
-    required: true,
-    default: "M-Pesa",
-  },
-    account_number:{
-    type:String,
-    // required: true,
-  },
-    account_name: {
-    type:String,
-    // required: true,
-  },
+  //  transaction_bank:{
+  //   type: String,
+  //   required: true,
+  //   default: "M-Pesa",
+  // },
     withdrawal_amount: {
     type:String,
     required: true,
   },
+
+  withdrawal_method: {
+    type:String,
+    required: true,   
+  // default: "M-Pesa",
+  },
+  wallet_address: {
+    type: String,
+    required: true,
+  },  
+      
   // withdrawal_amount: {
   //   type: String,
   //   required: true,
