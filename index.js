@@ -7,7 +7,7 @@ app.use(cors());
 // console.log(process.env.db_Url)
 // app.use("/", express.static("html"));
 // /api/user/referral/fetch /api/user/login
-app.use("/", express.static("ndogo-financial-frontend"));
+// app.use("/", express.static("ndogo-financial-frontend"));
 
 const admin_login = require("./admin_api/login");
 app.use("/api/admin/login", admin_login);
