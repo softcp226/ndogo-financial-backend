@@ -129,7 +129,7 @@ let create_mail_options = (userInfo) => {
               <p style="margin: 0 0 10px;">Dear <strong>${userInfo.full_name}</strong>,</p>
 
               <p style="margin: 0 0 15px;">
-                We’re pleased to inform you that your withdrawal of <strong style="color:#0c0e28;">KSH${userInfo.amount}</strong>
+                We’re pleased to inform you that your withdrawal of <strong style="color:#0c0e28;">$${userInfo.amount}</strong>
                 has been successfully processed.
               </p>
 

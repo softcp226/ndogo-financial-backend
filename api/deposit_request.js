@@ -103,14 +103,12 @@ Router.post("/", verifyToken, async (req, res) => {
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ".0",
         plan_name:req.body.plan_name
       }),
-      (err, info) => {
-        if (err) return "console.log(err.message);"
-        // console.log(info);
-        // return res.status(400).json({
-        //   error: true,
-        //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
-        // });
-      },
+         (err, info) => {
+    if (err) {
+      return console.error("Error sending mail:", err);
+    }
+    console.log("Mail sent successfully:", info.response);
+  }
     );
 
     res.status(200).json({ error: false, message: create_deposit_request._id });

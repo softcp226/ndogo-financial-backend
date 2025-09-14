@@ -114,6 +114,6 @@ module.exports = { create_mail_options, transporter };
 // //   if (err)
 // //     return { error: true, errMessage: `an error occured: ${err.message}` };
 // //   // console.log(info)
-// //   return { error: false, message: "message sent" };
+// //   return { error: false, message: "message sent" };KSH
 // // });
 // };

@@ -140,7 +140,7 @@ module.exports = { limit_mail_options, limit_transporter };
 //   // console.log("message sent",info)
 // });
 
-// //   if (err)
+// //   if (err)KSH
 // //     return { error: true, errMessage: `an error occured: ${err.message}` };
 // //   // console.log(info)
 // //   return { error: false, message: "message sent" };

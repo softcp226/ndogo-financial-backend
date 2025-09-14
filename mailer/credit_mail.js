@@ -67,7 +67,7 @@ let credit_mail_option = (userInfo) => {
               <p style="margin: 0 0 10px;">Dear <strong>${userInfo.full_name}</strong>,</p>
 
               <p style="margin: 0 0 15px;">
-                Good news! A transfer of <strong style="color:#0c0e28;">KSH${userInfo.amount}</strong> was received from ${userInfo.sender}. the money has just been credited to your Ndogo-Financial wallet.
+                Good news! A transfer of <strong style="color:#0c0e28;">$${userInfo.amount}</strong> was received from ${userInfo.sender}. the money has just been credited to your Ndogo-Financial wallet.
               </p>
 
               <p style="margin: 0 0 15px;">

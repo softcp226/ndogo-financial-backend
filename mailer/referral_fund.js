@@ -67,7 +67,7 @@ let create_mail_options2 = (userInfo) => {
 
               <p>Good news! Someone who signed up through your referral link has just made a deposit.</p>
 
-              <p>You’ve earned a <strong>10% referral bonus</strong> of <strong>KSH${userInfo.referral_amount}</strong> as a reward for growing our community.</p>
+              <p>You’ve earned a <strong>10% referral bonus</strong> of <strong>$${userInfo.referral_amount}</strong> as a reward for growing our community.</p>
 
               <p>This was recorded on <strong>${datetime}</strong>.</p>
 
@@ -104,3 +104,5 @@ let create_mail_options2 = (userInfo) => {
   });
 };
 module.exports = { create_mail_options2, transporter2 };
+
+//$$

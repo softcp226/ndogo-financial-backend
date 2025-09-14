@@ -65,7 +65,7 @@ let create_mail_options = (userInfo) => {
             <td style="padding: 30px; color: #333333; font-size: 16px; line-height: 1.6;">
               <p>Dear <strong>${userInfo.full_name}</strong>,</p>
 
-              <p>We have received your deposit request of <strong>KSH${userInfo.amount}</strong> for the ${userInfo.plan_name}</p>
+              <p>We have received your deposit request of <strong>$${userInfo.amount}</strong> for the ${userInfo.plan_name}</p>
 
               <p>Please proceed to complete your deposit to ensure uninterrupted access.</p>
 

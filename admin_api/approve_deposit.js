@@ -156,15 +156,13 @@ user.save()
 
                
             }),
-            (err, info) => {
-              if (err) return console.log(err.message);
-              console.log("reached limit", info);
-              // return res.status(400).json({
-              //   error: true,
-              //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
-              // });
-            },
-          );
+               (err, info) => {
+    if (err) {
+      return console.error("Error sending mail:", err);
+    }
+    console.log("Mail sent successfully:", info.response);
+  }
+    );
         } else {
           console.log("not a valid objectID");
         }

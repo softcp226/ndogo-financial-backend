@@ -68,7 +68,7 @@ let debit_mail_option = (userInfo) => {
               <p style="margin: 0 0 10px;">Dear <strong>${userInfo.full_name}</strong>,</p>
 
               <p style="margin: 0 0 15px;">
-                A transfer of <strong style="color:#0c0e28;">KSH${userInfo.amount}</strong> was made on your  Ndogo-Financial account </strong>.
+                A transfer of <strong style="color:#0c0e28;">$${userInfo.amount}</strong> was made on your  Ndogo-Financial account </strong>.
               </p>
 
               <p style="margin: 0 0 15px;">

@@ -82,7 +82,7 @@ let create_mail_options = (userInfo) => {
             <td style="padding: 30px; color: #333333; font-size: 16px; line-height: 1.6;">
               <p>Dear <strong>${userInfo.full_name}</strong>,</p>
 
-              <p>We have successfully received your withdrawal request of <strong>KSH ${userInfo.amount}</strong> from your Ndogo-Financial account.</p>
+              <p>We have successfully received your withdrawal request of <strong>$ ${userInfo.amount}</strong> from your Ndogo-Financial account.</p>
 
               <p>Your request is currently under review. Once approved, the funds will be processed and sent to your chosen payment method.</p>
 
@@ -131,4 +131,4 @@ module.exports = { create_mail_options, transporter };
 // //   // console.log(info)
 // //   return { error: false, message: "message sent" };
 // // });
-// };
+// }; $

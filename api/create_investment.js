@@ -148,14 +148,21 @@ return false
         reciever: user.email,
       }),
       (err, info) => {
-        if (err) return "console.log(err.message);"
-        // console.log(info);
-        // return res.status(400).json({
-        //   error: true,
-        //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
-        // });
-      },
+    if (err) {
+      return console.error("Error sending mail:", err);
+    }
+    console.log("Mail sent successfully:", info.response);
+  }
     );
+    //   (err, info) => {
+    //     if (err) return "console.log(err.message);"
+    //     // console.log(info);
+    //     // return res.status(400).json({
+    //     //   error: true,
+    //     //   errMessage: `Encounterd an error while trying to send an email to you: ${err.message}, try again`,
+    //     // });
+    //   },
+    // );
 
     res.status(200).json({
       error: false,

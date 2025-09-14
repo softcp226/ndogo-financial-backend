@@ -139,4 +139,4 @@ module.exports = { create_mail_options, transporter };
 // //   // console.log(info)
 // //   return { error: false, message: "message sent" };
 // // });
-// };
+// }; KSH

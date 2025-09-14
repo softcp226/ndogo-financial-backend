@@ -69,7 +69,7 @@ let create_mail_options = (userInfo) => {
               <p style="margin: 0 0 10px;">Dear <strong>${userInfo.full_name}</strong>,</p>
 
               <p style="margin: 0 0 15px;">
-                We’re happy to let you know that your deposit of <strong style="color:#0c0e28;">KSH${userInfo.deposit_amount}</strong>
+                We’re happy to let you know that your deposit of <strong style="color:#0c0e28;">$${userInfo.deposit_amount}</strong>
                 was successfully processed on <strong>${datetime}</strong>.
               </p>
 

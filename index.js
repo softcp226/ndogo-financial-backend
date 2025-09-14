@@ -53,7 +53,7 @@ app.use("/api/user/savewallet",save_wallet)
 
 // const joint_account_signup=require("./joint_account_api/register")
 // app.use("/api/user/joint_account/signup",joint_account_signup)
-
+console.log("environment variables",process.env.host)
 const fetch_referral=require("./api/fetch_referrals")
 app.use("/api/user/referral/fetch",fetch_referral)
 
